@@ -4,8 +4,13 @@ import project.oop.g26.Permission;
 
 public class GUser extends User {
 
+    private Permission[] permissions;
+
     public GUser(String username, String password) {
         super(username, password);
+        this.permissions = new Permission[]{
+                Permission.SHOW_ABOUT_US,
+        };
     }
 
     @Override
@@ -15,7 +20,7 @@ public class GUser extends User {
 
     @Override
     public Permission[] getPermissions() {
-        return new Permission[0];
+        return permissions;
     }
 
 }

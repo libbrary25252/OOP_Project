@@ -5,15 +5,13 @@ import java.util.Arrays;
 public enum Permission {
     CREATE_USER_ACCOUNT,
     DELETE_USER_ACCOUNT,
-    CREATE_ADMIN_ACCOUNT,
-    DELETE_ADMIN_ACCOUNT,
     CREATE_COURSE,
     DELETE_COURSE,
     SHOW_ABOUT_US,
-    DISPLAY_USER_ACCOUNTS,
     EDIT_PASSWORD,
     ADD_RECORD,
-    DELETE_RECORD;
+    DELETE_RECORD,
+    SHOW_RECORD;
 
     private String node;
 

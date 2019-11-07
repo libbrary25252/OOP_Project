@@ -16,13 +16,21 @@ public abstract class User {
 
     public User(String username, String password) {
         this.username = username;
+        this.passwordHashed = hashPassword(password);
+    }
+
+    public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            this.passwordHashed = Base64.getEncoder().encodeToString(digest.digest(password.getBytes()));
+            return Base64.getEncoder().encodeToString(digest.digest(password.getBytes()));
         } catch (NoSuchAlgorithmException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-            this.passwordHashed = password;
+            return password;
         }
+    }
+
+    public void setPassword(String plainPw) {
+        this.passwordHashed = hashPassword(plainPw);
     }
 
     public String getPasswordHashed() {

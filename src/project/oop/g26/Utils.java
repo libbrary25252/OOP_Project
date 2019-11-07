@@ -29,4 +29,12 @@ public class Utils {
             return Optional.empty();
         }
     }
+
+    public static <T extends Number> boolean test(String str, Class<T> type) {
+        return tryParse(str, type).isPresent();
+    }
+
+    public static void debug(String message) {
+        System.out.println("[DEBUG] " + message);
+    }
 }

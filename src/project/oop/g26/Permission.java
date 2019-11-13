@@ -3,12 +3,20 @@ package project.oop.g26;
 import java.util.Arrays;
 
 public enum Permission {
+    /*
+    Account
+     */
     CREATE_USER_ACCOUNT,
     DELETE_USER_ACCOUNT,
-    CREATE_COURSE,
-    DELETE_COURSE,
+    EDIT_OTHER_PASSWORD,
+    /*
+    main
+     */
     SHOW_ABOUT_US,
     EDIT_PASSWORD,
+    /*
+    Course
+     */
     ADD_RECORD,
     DELETE_RECORD,
     SHOW_RECORD;

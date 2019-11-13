@@ -1,8 +1,6 @@
 package project.oop.g26;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 public class Utils {
@@ -36,5 +34,9 @@ public class Utils {
 
     public static void debug(String message) {
         System.out.println("[DEBUG] " + message);
+    }
+
+    public static boolean notNull(Object... nonNull) {
+        return Arrays.stream(nonNull).allMatch(Objects::nonNull);
     }
 }

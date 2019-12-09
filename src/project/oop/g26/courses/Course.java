@@ -1,7 +1,7 @@
 package project.oop.g26.courses;
 
+import project.oop.g26.LoginUser;
 import project.oop.g26.Utils;
-import project.oop.g26.roles.GUser;
 
 import java.io.*;
 import java.util.Arrays;
@@ -16,9 +16,9 @@ public class Course {
     private final String[] columns;
     private Map<Long, String[]> record = new HashMap<>();
     private final File csv;
-    private final Function<GUser, String[]> createRecordFunc;
+    private final Function<LoginUser, String[]> createRecordFunc;
 
-    private Course(String name, String[] information, String[] columns, Function<GUser, String[]> createRecordFunc) throws IOException {
+    private Course(String name, String[] information, String[] columns, Function<LoginUser, String[]> createRecordFunc) throws IOException {
         this.name = name;
         this.information = information;
         this.columns = columns;
@@ -27,7 +27,7 @@ public class Course {
         if (csv.createNewFile()) Utils.debug("Successfully create csv file for " + name);
     }
 
-    public void addRecord(GUser user) {
+    public void addRecord(LoginUser user) {
         String[] record = createRecordFunc.apply(user);
         if (record.length != columns.length) {
             System.out.println("Validate failed. make sure your string array is same as columns name");
@@ -81,7 +81,7 @@ public class Course {
         private String name;
         private String[] info;
         private String[] columns;
-        private Function<GUser, String[]> func;
+        private Function<LoginUser, String[]> func;
 
         private Builder(String name) {
             this.name = name;
@@ -101,7 +101,7 @@ public class Course {
             return this;
         }
 
-        public Builder create(Function<GUser, String[]> func) {
+        public Builder create(Function<LoginUser, String[]> func) {
             this.func = func;
             return this;
         }

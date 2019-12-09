@@ -1,4 +1,4 @@
-package project.oop.g26;
+package project.oop.g26.manager;
 
 import project.oop.g26.courses.Course;
 

@@ -2,16 +2,11 @@ package project.oop.g26.roles;
 
 import project.oop.g26.Permission;
 
-public class Administrator extends User {
-
-
-    public Administrator(String username, String password) {
-        super(username, password);
-    }
+final class Administrator implements IRole {
 
     @Override
-    public String getRoleInfo() {
-        return User.ADMINISTRATOR_INFO;
+    public String getUserInfo() {
+        return "admin info";
     }
 
     @Override

@@ -1,8 +1,10 @@
 package project.oop.g26;
 
-import project.oop.g26.courses.Course;
+import project.oop.g26.manager.PanelManger;
+import project.oop.g26.panels.LoginPanel;
+import project.oop.g26.panels.MainPanel;
 
-import java.util.Scanner;
+import javax.swing.*;
 
 public class App {
     public static void main(String[] args) {
@@ -10,12 +12,25 @@ public class App {
         Utils.registerParse(Integer.class, Integer::parseInt);
         Utils.tryParse("95", Integer.class).map(i -> i + 5).ifPresent(System.out::println);
 
-        Course course = Course.Builder.name("Java").info("This is a java course", "which teach you java").create(gUser -> {
-            Scanner scanner = new Scanner(System.in);
-            return new String[0];
-        }).build();
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
+        JFrame frame = new JFrame("Panel");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(700, 500);
+        frame.setVisible(true);
+
+        PanelManger manger = new PanelManger(frame);
+
+        manger.addPanel("MainPanel", new MainPanel());
+        manger.addPanel("Login", new LoginPanel());
+
+        manger.setPanel("Login");
 
 
     }

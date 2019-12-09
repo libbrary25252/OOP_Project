@@ -34,7 +34,10 @@ public final class MainPanel extends IPanel {
         addPanelChanger(myCourse, "MyCourse");
         addPanelChanger(makeAppointment, "Appointment");
 
-        logout.addActionListener(e -> MainStream.logout());
+        logout.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Successfully Logout", "Logout Success", JOptionPane.INFORMATION_MESSAGE);
+            MainStream.logout();
+        });
     }
 
 }

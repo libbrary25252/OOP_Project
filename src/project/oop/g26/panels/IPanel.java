@@ -9,7 +9,7 @@ import java.util.Map;
 
 public abstract class IPanel extends JPanel {
 
-    private static Map<JButton, String> jumpInto = new HashMap<>();
+    private final Map<JButton, String> jumpInto = new HashMap<>();
 
     public IPanel() {
         this.initGUI();
@@ -18,17 +18,17 @@ public abstract class IPanel extends JPanel {
         setLayout(null);
     }
 
-    public static void addPanelChanger(JButton button, String panelName) {
+    public final void addPanelChanger(JButton button, String panelName) {
         jumpInto.putIfAbsent(button, panelName);
     }
 
     protected abstract void initGUI();
 
-    public void setOnClick(PanelManger manger) {
+    public final void setOnClick(PanelManger manger) {
         jumpInto.forEach((k, v) -> k.addActionListener(e -> manger.showPanel(v)));
     }
 
-    public void addComponents(Component... components) {
+    public final void addComponents(Component... components) {
         for (Component component : components) {
             add(component);
         }

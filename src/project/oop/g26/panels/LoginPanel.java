@@ -33,6 +33,7 @@ public final class LoginPanel extends IPanel {
             if (user == null) {
                 JOptionPane.showMessageDialog(this, "Username of Password not correct", "Login Failed", JOptionPane.WARNING_MESSAGE);
             } else {
+                JOptionPane.showMessageDialog(this, "Welcome back, " + user.getU_Name(), "Login Success", JOptionPane.INFORMATION_MESSAGE);
                 MainStream.login(user);
                 userId.setText("");
                 pw.setText("");

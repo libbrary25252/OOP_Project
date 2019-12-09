@@ -8,6 +8,7 @@ import project.oop.g26.panels.LoginPanel;
 import project.oop.g26.panels.MainPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class App {
     public static void main(String[] args) {
@@ -25,9 +26,13 @@ public class App {
 
         JFrame frame = new JFrame("Panel");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(700, 500);
+        Dimension d = new Dimension(700, 500);
+        frame.setSize(d);
+        frame.setMaximumSize(d);
+        frame.setMinimumSize(d);
         frame.setVisible(true);
         frame.setLayout(null);
+        frame.setExtendedState(JFrame.MAXIMIZED_VERT);
 
         PanelManger panelManager = new PanelManger(frame);
         CourseManager courseManager = new CourseManager();

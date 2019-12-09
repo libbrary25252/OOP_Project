@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class mainPanel extends JFrame {
 
     JLabel W;
-    JButton LR, Au, c, Pf, out;
+    JButton LR, Au, c, Pf, Ma, out;
 
     public mainPanel() {
         super("Home");
@@ -21,7 +21,8 @@ public class mainPanel extends JFrame {
 
         W = new JLabel("Welcome to the programming course system!");
         LR = new JButton("My Login Record");
-        Au = new JButton("Make Appointment");
+        Ma = new JButton("Make Appointment");
+        Au = new JButton("About us");
         c = new JButton("My Course");
         Pf = new JButton("My Profile");
         out = new JButton("Logout");
@@ -30,7 +31,8 @@ public class mainPanel extends JFrame {
         Pf.setBounds(20,100,160,120);
         c.setBounds(240,100,160,120);
         LR.setBounds(460,100,160,120);
-        Au.setBounds(20,250,160,120);
+        Ma.setBounds(20,250,160,120);
+        Au.setBounds(240,250,160,120);
         out.setBounds(560,400,80,20);
 
         add(W);
@@ -39,13 +41,6 @@ public class mainPanel extends JFrame {
         add(LR);
         add(Au);
         add(out);
-
-        Pf.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Profile();
-            }
-        });
 
         Pf.addActionListener(new ActionListener() {
             @Override
@@ -62,10 +57,20 @@ public class mainPanel extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 new LoginRPanel();
                     }
-        Au.addActionListener(new ActionListener() {
+        Ma.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     new aptPanel();
+                }
+         Au.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new Aboutus();
+                }
+         out.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
                 }
 
         setLayout(null);

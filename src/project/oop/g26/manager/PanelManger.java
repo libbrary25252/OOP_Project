@@ -4,6 +4,8 @@ import project.oop.g26.panels.IPanel;
 
 import javax.swing.*;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PanelManger {
@@ -21,11 +23,20 @@ public class PanelManger {
         this.panelMap.put(name, panel);
     }
 
-    public void setPanel(String name) {
+    public void showPanel(String name) {
+        this.showPanel(name, 200);
+    }
+
+    public void showPanel(String name, long delay) {
         if (!panelMap.containsKey(name)) {
             System.out.println("Panel " + name + " does not exist!");
             return;
         }
-        frame.setContentPane(panelMap.get(name));
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                frame.setContentPane(panelMap.get(name));
+            }
+        }, delay);
     }
 }

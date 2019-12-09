@@ -1,7 +1,7 @@
 package project.oop.g26.courses;
 
 import project.oop.g26.LoginUser;
-import project.oop.g26.Utils;
+import project.oop.g26.misc.Utils;
 
 import java.io.*;
 import java.util.Arrays;
@@ -17,13 +17,15 @@ public class Course {
     private Map<Long, String[]> record = new HashMap<>();
     private final File csv;
     private final Function<LoginUser, String[]> createRecordFunc;
+    private final String fileName;
 
-    private Course(String name, String[] information, String[] columns, Function<LoginUser, String[]> createRecordFunc) throws IOException {
+    private Course(String name, String[] information, String[] columns, Function<LoginUser, String[]> createRecordFunc, String fileName) throws IOException {
         this.name = name;
         this.information = information;
         this.columns = columns;
+        this.fileName = fileName;
         this.createRecordFunc = createRecordFunc;
-        this.csv = new File(name + ".csv");
+        this.csv = new File(fileName + ".csv");
         if (csv.createNewFile()) Utils.debug("Successfully create csv file for " + name);
     }
 
@@ -77,11 +79,13 @@ public class Course {
         return record;
     }
 
+
     public static class Builder {
         private String name;
         private String[] info;
         private String[] columns;
         private Function<LoginUser, String[]> func;
+        private String fileName;
 
         private Builder(String name) {
             this.name = name;
@@ -101,6 +105,11 @@ public class Course {
             return this;
         }
 
+        public Builder fileName(String fileName) {
+            this.fileName = fileName;
+            return this;
+        }
+
         public Builder create(Function<LoginUser, String[]> func) {
             this.func = func;
             return this;
@@ -108,10 +117,10 @@ public class Course {
 
         public Course build() {
             try {
-                if (!Utils.notNull(name, info, columns, func)) {
+                if (!Utils.notNull(name, info, columns, func, fileName)) {
                     throw new IllegalStateException("some infomation are lost.");
                 }
-                return new Course(name, info, columns, func);
+                return new Course(name, info, columns, func, fileName);
             } catch (IOException e) {
                 e.printStackTrace();
                 Utils.debug("Error: " + e.getMessage());

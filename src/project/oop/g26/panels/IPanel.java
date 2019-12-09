@@ -25,7 +25,7 @@ public abstract class IPanel extends JPanel {
     protected abstract void initGUI();
 
     public void setOnClick(PanelManger manger) {
-        jumpInto.forEach((k, v) -> k.addActionListener(e -> manger.setPanel(v)));
+        jumpInto.forEach((k, v) -> k.addActionListener(e -> manger.showPanel(v)));
     }
 
     public void addComponents(Component... components) {

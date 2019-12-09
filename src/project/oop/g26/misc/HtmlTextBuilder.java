@@ -1,4 +1,4 @@
-package project.oop.g26;
+package project.oop.g26.misc;
 
 import java.awt.*;
 

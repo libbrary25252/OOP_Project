@@ -1,6 +1,9 @@
 package project.oop.g26;
 
+import project.oop.g26.courses.Course;
+import project.oop.g26.manager.CourseManager;
 import project.oop.g26.manager.PanelManger;
+import project.oop.g26.misc.Utils;
 import project.oop.g26.panels.LoginPanel;
 import project.oop.g26.panels.MainPanel;
 
@@ -24,14 +27,27 @@ public class App {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setVisible(true);
+        frame.setLayout(null);
 
-        PanelManger manger = new PanelManger(frame);
+        PanelManger panelManager = new PanelManger(frame);
+        CourseManager courseManager = new CourseManager();
 
-        manger.addPanel("MainPanel", new MainPanel());
-        manger.addPanel("Login", new LoginPanel());
-
-        manger.setPanel("Login");
+        panelManager.addPanel("MainPanel", new MainPanel());
+        panelManager.addPanel("Login", new LoginPanel());
 
 
+        Course java = Course.Builder.name("Java")
+                .columns("AR_ID", "U_ID", "Reversed Time", "Appointment Type", "Recorded", "Remarks")
+                .info("java java")
+                .fileName("G26M1Lam")
+                .create(loginUser -> {
+                    return new String[0];
+                }).build();
+
+
+        MainStream.setCourseManager(courseManager);
+        MainStream.setPanelManger(panelManager);
+
+        panelManager.showPanel("Login");
     }
 }

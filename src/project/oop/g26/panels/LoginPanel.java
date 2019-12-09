@@ -1,6 +1,8 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.HtmlTextBuilder;
+import project.oop.g26.LoginUser;
+import project.oop.g26.MainStream;
+import project.oop.g26.misc.HtmlTextBuilder;
 
 import javax.swing.*;
 
@@ -27,7 +29,14 @@ public final class LoginPanel extends IPanel {
         addComponents(loginTitle, userNameLabel, userId, passwordLabel, pw, loginbtn);
 
         loginbtn.addActionListener(e -> {
-
+            LoginUser user = LoginUser.tryLogin(userId.getText(), new String(pw.getPassword()));
+            if (user == null) {
+                JOptionPane.showMessageDialog(this, "Username of Password not correct", "Login Failed", JOptionPane.WARNING_MESSAGE);
+            } else {
+                MainStream.login(user);
+                userId.setText("");
+                pw.setText("");
+            }
         });
 
 

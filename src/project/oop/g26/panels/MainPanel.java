@@ -1,8 +1,10 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.HtmlTextBuilder;
+import project.oop.g26.MainStream;
+import project.oop.g26.misc.HtmlTextBuilder;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public final class MainPanel extends IPanel {
@@ -10,7 +12,7 @@ public final class MainPanel extends IPanel {
     @Override
     protected void initGUI() {
         JLabel w = new JLabel();
-        w.setText("<html><font style=\"color: green\">Welcome to the programming course system!</font></html>");
+        w.setText(HtmlTextBuilder.create("Welcome to the programming course system!").setFontSize(10).setColor(Color.GREEN).build());
         JButton loginRecord = new JButton(HtmlTextBuilder.create("My Login Record").setFontSize(15).build());
         JButton makeAppointment = new JButton(HtmlTextBuilder.create("Make Appointment").setFontSize(15).build());
         JButton aboutUs = new JButton(HtmlTextBuilder.create("About us").setFontSize(15).build());
@@ -30,8 +32,9 @@ public final class MainPanel extends IPanel {
 
         addPanelChanger(profile, "Profile");
         addPanelChanger(myCourse, "MyCourse");
-        addPanelChanger(logout, "Login");
         addPanelChanger(makeAppointment, "Appointment");
+
+        logout.addActionListener(e -> MainStream.logout());
     }
 
 }

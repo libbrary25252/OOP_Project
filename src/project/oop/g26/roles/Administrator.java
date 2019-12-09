@@ -1,6 +1,6 @@
 package project.oop.g26.roles;
 
-import project.oop.g26.Permission;
+import project.oop.g26.misc.Permission;
 
 final class Administrator implements IRole {
 

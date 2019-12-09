@@ -22,9 +22,14 @@ public final class G26CSVModifier implements Flushable, Closeable {
         caches = csvReader.readAll();
     }
 
-    public void remove(long... ids) {
-        caches.removeIf(s -> Arrays.stream(ids).anyMatch(id -> s[0].equals(id + "")));
+    public void remove(int pos, long... ids) {
+        caches.removeIf(s -> Arrays.stream(ids).anyMatch(id -> s[pos].equals(id + "")));
     }
+
+    public void remove(long... ids) {
+        this.remove(0, ids);
+    }
+
 
     public void append(String[]... lines) {
         Collections.addAll(caches, lines);

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 ///Login GUI
-public class Logout extends JFrame {
+public class logout extends JFrame {
 
     private JButton Loginbtn;
     private JPasswordField p;
@@ -13,7 +13,7 @@ public class Logout extends JFrame {
     private JLabel LIN, UN, PW;
 
 
-    public Logout() {
+    public logout() {
         super("System Login");
         setSize(500,500);
         setDefaultCloseOperation ( EXIT_ON_CLOSE );
@@ -62,7 +62,7 @@ public class Logout extends JFrame {
         SwingUtilities.invokeLater(new Runnable() { // for thread concurrency issue
             public void run() {
                 JFrame frame = new JFrame("System Login");
-                new Logout().setVisible(true);
+                new logout().setVisible(true);
             }
         });
         System.out.println("END of main() method!");

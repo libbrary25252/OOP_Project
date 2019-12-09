@@ -33,7 +33,7 @@ public final class G26MainPanel extends G26IPanel {
 
         aboutUs.addActionListener(e -> {
             ImageIcon mem = new ImageIcon("Member2.jpg");
-            String Intro = "Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka " + "\n" + "XXX";
+            String Intro = ("Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka Hing" + "\n" + "LAM Chak Wai");
             JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL01, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
         });
 

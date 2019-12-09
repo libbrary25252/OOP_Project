@@ -1,7 +1,7 @@
 package project.oop.g26.courses;
 
-import project.oop.g26.LoginUser;
-import project.oop.g26.misc.Utils;
+import project.oop.g26.G26LoginUser;
+import project.oop.g26.misc.G26Utils;
 
 import java.io.*;
 import java.util.Arrays;
@@ -10,26 +10,26 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
-public class Course {
+public class G26Course {
     private final String name;
     private final String[] information;
     private final String[] columns;
     private Map<Long, String[]> record = new HashMap<>();
     private final File csv;
-    private final Function<LoginUser, String[]> createRecordFunc;
+    private final Function<G26LoginUser, String[]> createRecordFunc;
     private final String fileName;
 
-    private Course(String name, String[] information, String[] columns, Function<LoginUser, String[]> createRecordFunc, String fileName) throws IOException {
+    private G26Course(String name, String[] information, String[] columns, Function<G26LoginUser, String[]> createRecordFunc, String fileName) throws IOException {
         this.name = name;
         this.information = information;
         this.columns = columns;
         this.fileName = fileName;
         this.createRecordFunc = createRecordFunc;
         this.csv = new File(fileName + ".csv");
-        if (csv.createNewFile()) Utils.debug("Successfully create csv file for " + name);
+        if (csv.createNewFile()) G26Utils.debug("Successfully create csv file for " + name);
     }
 
-    public void addRecord(LoginUser user) {
+    public void addRecord(G26LoginUser user) {
         String[] record = createRecordFunc.apply(user);
         if (record.length != columns.length) {
             System.out.println("Validate failed. make sure your string array is same as columns name");
@@ -48,7 +48,7 @@ public class Course {
             record.forEach((l, str) -> writer.println(l + "," + String.join(",", str)));
         } catch (IOException e) {
             e.printStackTrace();
-            Utils.debug("Error: " + e.getMessage());
+            G26Utils.debug("Error: " + e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class Course {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Utils.debug("Error: " + e.getMessage());
+            G26Utils.debug("Error: " + e.getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ public class Course {
         private String name;
         private String[] info;
         private String[] columns;
-        private Function<LoginUser, String[]> func;
+        private Function<G26LoginUser, String[]> func;
         private String fileName;
 
         private Builder(String name) {
@@ -110,20 +110,20 @@ public class Course {
             return this;
         }
 
-        public Builder create(Function<LoginUser, String[]> func) {
+        public Builder create(Function<G26LoginUser, String[]> func) {
             this.func = func;
             return this;
         }
 
-        public Course build() {
+        public G26Course build() {
             try {
-                if (!Utils.notNull(name, info, columns, func, fileName)) {
+                if (!G26Utils.notNull(name, info, columns, func, fileName)) {
                     throw new IllegalStateException("some infomation are lost.");
                 }
-                return new Course(name, info, columns, func, fileName);
+                return new G26Course(name, info, columns, func, fileName);
             } catch (IOException e) {
                 e.printStackTrace();
-                Utils.debug("Error: " + e.getMessage());
+                G26Utils.debug("Error: " + e.getMessage());
                 return null;
             }
         }

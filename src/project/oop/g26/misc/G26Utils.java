@@ -3,7 +3,7 @@ package project.oop.g26.misc;
 import java.util.*;
 import java.util.function.Function;
 
-public class Utils {
+public class G26Utils {
 
 
     private static Map<Class<? extends Number>, Function<String, ? extends Number>> parseMap = new HashMap<>();

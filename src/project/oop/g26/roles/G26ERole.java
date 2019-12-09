@@ -1,6 +1,6 @@
 package project.oop.g26.roles;
 
-import project.oop.g26.misc.Permission;
+import project.oop.g26.misc.G26Permission;
 
 import javax.swing.*;
 import java.security.MessageDigest;
@@ -8,30 +8,29 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ERole implements IRole {
+public enum G26ERole implements G26IRole {
 
-    ADMINISTRATOR(new Administrator()),
-    GUSER(new GUser());
+    ADMINISTRATOR(new G26Administrator()),
+    GUSER(new G26GUser());
 
 
-    private IRole role;
+    private static Map<String, G26IRole> customRoles = new HashMap<>();
+    private G26IRole role;
 
-    ERole(IRole role) {
+    G26ERole(G26IRole role) {
         this.role = role;
     }
-
-    private static Map<String, IRole> customRoles = new HashMap<>();
 
     static {
         customRoles.put(ADMINISTRATOR.toString().toLowerCase(), ADMINISTRATOR);
         customRoles.put(GUSER.toString().toLowerCase(), GUSER);
     }
 
-    public static void addRoles(String name, IRole role) {
+    public static void addRoles(String name, G26IRole role) {
         customRoles.put(name, role);
     }
 
-    public static IRole getCustomRole(String name) {
+    public static G26IRole getCustomRole(String name) {
         return customRoles.get(name);
     }
 
@@ -58,7 +57,7 @@ public enum ERole implements IRole {
         return role.getUserInfo();
     }
 
-    public Permission[] getPermissions() {
+    public G26Permission[] getPermissions() {
         return role.getPermissions();
     }
 

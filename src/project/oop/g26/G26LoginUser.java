@@ -1,12 +1,12 @@
 package project.oop.g26;
 
-import project.oop.g26.misc.Utils;
-import project.oop.g26.roles.ERole;
-import project.oop.g26.roles.IRole;
+import project.oop.g26.misc.G26Utils;
+import project.oop.g26.roles.G26ERole;
+import project.oop.g26.roles.G26IRole;
 
 import java.io.*;
 
-public class LoginUser {
+public class G26LoginUser {
 
     private static File userList;
     private static File loginRecord;
@@ -20,8 +20,8 @@ public class LoginUser {
                 if (userList.createNewFile()) {
                     try (PrintWriter writer = new PrintWriter(new FileOutputStream(userList))) {
                         writer.println(String.join(",", new String[]{"U_ID", "Encrypted_Password", "U_Name", "U_Role", "Year_Of_Birth"}));
-                        writer.println(toCSV(Utils.getRandomId(), "Root", ERole.hashPassword("a"), ERole.ADMINISTRATOR, "????"));
-                        writer.println(toCSV(Utils.getRandomId(), "Default", ERole.hashPassword("g"), ERole.GUSER, "????"));
+                        writer.println(toCSV(G26Utils.getRandomId(), "Root", G26ERole.hashPassword("a"), G26ERole.ADMINISTRATOR, "????"));
+                        writer.println(toCSV(G26Utils.getRandomId(), "Default", G26ERole.hashPassword("g"), G26ERole.GUSER, "????"));
                     }
                 }
             } catch (IOException e) {
@@ -42,7 +42,9 @@ public class LoginUser {
         }
     }
 
-    private LoginUser(long u_ID, String encrypted_Password, String u_Name, IRole u_Role, String year_of_Birth) {
+    private G26IRole U_Role;
+
+    private G26LoginUser(long u_ID, String encrypted_Password, String u_Name, G26IRole u_Role, String year_of_Birth) {
         U_ID = u_ID;
         Encrypted_Password = encrypted_Password;
         U_Name = u_Name;
@@ -50,29 +52,29 @@ public class LoginUser {
         Year_of_Birth = year_of_Birth;
     }
 
-    private LoginUser(String[] strings) {
-        this(Long.parseLong(strings[0]), strings[1], strings[2], ERole.valueOf(strings[3]), strings[4]);
-    }
-
     private long U_ID;
     private String Encrypted_Password;
     private String U_Name;
-    private IRole U_Role;
-    private String Year_of_Birth;
 
-    public static String toCSV(long u_ID, String u_Name, String encrypted_Password, IRole u_Role, String year_of_Birth) {
-        return new LoginUser(u_ID, u_Name, encrypted_Password, u_Role, year_of_Birth).toString();
+    private G26LoginUser(String[] strings) {
+        this(Long.parseLong(strings[0]), strings[1], strings[2], G26ERole.valueOf(strings[3]), strings[4]);
     }
 
-    public static LoginUser tryLogin(String name, String password) {
-        String hPw = ERole.hashPassword(password);
+    private String Year_of_Birth;
+
+    public static String toCSV(long u_ID, String u_Name, String encrypted_Password, G26IRole u_Role, String year_of_Birth) {
+        return new G26LoginUser(u_ID, u_Name, encrypted_Password, u_Role, year_of_Birth).toString();
+    }
+
+    public static G26LoginUser tryLogin(String name, String password) {
+        String hPw = G26ERole.hashPassword(password);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(userList)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] str = line.split(",");
                 boolean pass = str[2].equalsIgnoreCase(name) && str[1].equals(hPw);
                 if (pass) {
-                    LoginUser user = new LoginUser(str);
+                    G26LoginUser user = new G26LoginUser(str);
                     user.recordLogin();
                     return user;
                 }
@@ -87,7 +89,7 @@ public class LoginUser {
         try (PrintWriter writer = new PrintWriter(new FileWriter(loginRecord, true));
              BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(loginRecord)))) {
             boolean firstLogin = reader.lines().noneMatch(s -> s.split(",")[1].equals(U_ID + ""));
-            writer.println(String.format("%s,%d,%d,%s", Utils.getRandomId(), U_ID, System.currentTimeMillis(), firstLogin ? "First Login" : "-"));
+            writer.println(String.format("%s,%d,%d,%s", G26Utils.getRandomId(), U_ID, System.currentTimeMillis(), firstLogin ? "First Login" : "-"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,7 +107,7 @@ public class LoginUser {
         return U_Name;
     }
 
-    public IRole getU_Role() {
+    public G26IRole getU_Role() {
         return U_Role;
     }
 

@@ -1,18 +1,18 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.LoginUser;
-import project.oop.g26.MainStream;
-import project.oop.g26.misc.HtmlTextBuilder;
+import project.oop.g26.G26LoginUser;
+import project.oop.g26.G26MainStream;
+import project.oop.g26.misc.G26HtmlTextBuilder;
 
 import javax.swing.*;
 
 ///Login GUI
-public final class LoginPanel extends IPanel {
+public final class G26LoginPanel extends G26IPanel {
 
     @Override
     protected void initGUI() {
         //LOGIN
-        JLabel loginTitle = new JLabel(HtmlTextBuilder.create("LOGIN PAGE").setFontSize(15).build());
+        JLabel loginTitle = new JLabel(G26HtmlTextBuilder.create("LOGIN PAGE").setFontSize(15).build());
         //ENTER INFO
         JLabel userNameLabel = new JLabel("User Name");
         JLabel passwordLabel = new JLabel("Password");
@@ -29,12 +29,12 @@ public final class LoginPanel extends IPanel {
         addComponents(loginTitle, userNameLabel, userId, passwordLabel, pw, loginbtn);
 
         loginbtn.addActionListener(e -> {
-            LoginUser user = LoginUser.tryLogin(userId.getText(), new String(pw.getPassword()));
+            G26LoginUser user = G26LoginUser.tryLogin(userId.getText(), new String(pw.getPassword()));
             if (user == null) {
                 JOptionPane.showMessageDialog(this, "Username of Password not correct", "Login Failed", JOptionPane.WARNING_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Welcome back, " + user.getU_Name(), "Login Success", JOptionPane.INFORMATION_MESSAGE);
-                MainStream.login(user);
+                G26MainStream.login(user);
                 userId.setText("");
                 pw.setText("");
             }

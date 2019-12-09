@@ -1,17 +1,17 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.manager.PanelManger;
+import project.oop.g26.manager.G26PanelManger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class IPanel extends JPanel {
+public abstract class G26IPanel extends JPanel {
 
     private final Map<JButton, String> jumpInto = new HashMap<>();
 
-    public IPanel() {
+    public G26IPanel() {
         this.initGUI();
         setFont(Font.getFont("Microsoft Jhenghei"));
         setVisible(true);
@@ -24,7 +24,7 @@ public abstract class IPanel extends JPanel {
 
     protected abstract void initGUI();
 
-    public final void setOnClick(PanelManger manger) {
+    public final void setOnClick(G26PanelManger manger) {
         jumpInto.forEach((k, v) -> k.addActionListener(e -> manger.showPanel(v)));
     }
 

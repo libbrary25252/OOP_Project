@@ -1,20 +1,20 @@
 package project.oop.g26;
 
-import project.oop.g26.courses.Course;
-import project.oop.g26.manager.CourseManager;
-import project.oop.g26.manager.PanelManger;
-import project.oop.g26.misc.Utils;
-import project.oop.g26.panels.LoginPanel;
-import project.oop.g26.panels.MainPanel;
+import project.oop.g26.courses.G26Course;
+import project.oop.g26.manager.G26CourseManager;
+import project.oop.g26.manager.G26PanelManger;
+import project.oop.g26.misc.G26Utils;
+import project.oop.g26.panels.G26LoginPanel;
+import project.oop.g26.panels.G26MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class App {
+public class G26MainSys {
     public static void main(String[] args) {
-        Utils.registerParse(Float.class, Float::parseFloat);
-        Utils.registerParse(Integer.class, Integer::parseInt);
-        Utils.tryParse("95", Integer.class).map(i -> i + 5).ifPresent(System.out::println);
+        G26Utils.registerParse(Float.class, Float::parseFloat);
+        G26Utils.registerParse(Integer.class, Integer::parseInt);
+        G26Utils.tryParse("95", Integer.class).map(i -> i + 5).ifPresent(System.out::println);
 
 
         try {
@@ -34,14 +34,14 @@ public class App {
         frame.setLayout(null);
         frame.setExtendedState(JFrame.MAXIMIZED_VERT);
 
-        PanelManger panelManager = new PanelManger(frame);
-        CourseManager courseManager = new CourseManager();
+        G26PanelManger panelManager = new G26PanelManger(frame);
+        G26CourseManager courseManager = new G26CourseManager();
 
-        panelManager.addPanel("MainPanel", new MainPanel());
-        panelManager.addPanel("Login", new LoginPanel());
+        panelManager.addPanel("MainPanel", new G26MainPanel());
+        panelManager.addPanel("Login", new G26LoginPanel());
 
 
-        Course java = Course.Builder.name("Java")
+        G26Course java = G26Course.Builder.name("Java")
                 .columns("AR_ID", "U_ID", "Reversed Time", "Appointment Type", "Recorded", "Remarks")
                 .info("java java")
                 .fileName("G26M1Lam")
@@ -50,8 +50,8 @@ public class App {
                 }).build();
 
 
-        MainStream.setCourseManager(courseManager);
-        MainStream.setPanelManger(panelManager);
+        G26MainStream.setCourseManager(courseManager);
+        G26MainStream.setPanelManger(panelManager);
 
         panelManager.showPanel("Login");
     }

@@ -2,7 +2,7 @@ package project.oop.g26.misc;
 
 import java.util.Arrays;
 
-public enum Permission {
+public enum G26Permission {
     /*
     Account
      */
@@ -23,11 +23,11 @@ public enum Permission {
 
     private String node;
 
-    Permission() {
+    G26Permission() {
         node = this.name().replaceAll("_", ".").toLowerCase();
     }
 
-    public static Permission getPermission(String node) {
+    public static G26Permission getPermission(String node) {
         return Arrays.stream(values()).filter(p -> p.node.equalsIgnoreCase(node)).findAny().orElse(null);
     }
 

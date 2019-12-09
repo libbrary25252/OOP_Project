@@ -87,7 +87,7 @@ public class LoginUser {
         try (PrintWriter writer = new PrintWriter(new FileWriter(loginRecord, true));
              BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(loginRecord)))) {
             boolean firstLogin = reader.lines().noneMatch(s -> s.split(",")[1].equals(U_ID + ""));
-            writer.println(String.format("%s,%d,%d,%s", Utils.getRandomId(), U_ID, System.currentTimeMillis(), firstLogin ? "firstlogin" : "-"));
+            writer.println(String.format("%s,%d,%d,%s", Utils.getRandomId(), U_ID, System.currentTimeMillis(), firstLogin ? "First Login" : "-"));
         } catch (IOException e) {
             e.printStackTrace();
         }

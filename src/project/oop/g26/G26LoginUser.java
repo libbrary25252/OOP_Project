@@ -20,8 +20,8 @@ public class G26LoginUser {
                 if (userList.createNewFile()) {
                     try (PrintWriter writer = new PrintWriter(new FileOutputStream(userList))) {
                         writer.println(String.join(",", new String[]{"U_ID", "Encrypted_Password", "U_Name", "U_Role", "Year_Of_Birth"}));
-                        writer.println(toCSV(G26Utils.getRandomId(), "Root", G26ERole.hashPassword("a"), G26ERole.ADMINISTRATOR, "????"));
-                        writer.println(toCSV(G26Utils.getRandomId(), "Default", G26ERole.hashPassword("g"), G26ERole.GUSER, "????"));
+                        writer.println(toCSV(G26Utils.getRandomId(), G26ERole.hashPassword("a"), "Root", G26ERole.ADMINISTRATOR, "????"));
+                        writer.println(toCSV(G26Utils.getRandomId(), G26ERole.hashPassword("g"), "Default", G26ERole.GUSER, "????"));
                     }
                 }
             } catch (IOException e) {

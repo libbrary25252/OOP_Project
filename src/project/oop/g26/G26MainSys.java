@@ -23,7 +23,6 @@ public class G26MainSys {
             e.printStackTrace();
         }
 
-
         JFrame frame = new JFrame("Panel");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Dimension d = new Dimension(700, 500);

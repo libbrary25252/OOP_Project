@@ -34,6 +34,12 @@ public final class G26MainPanel extends G26IPanel {
         addPanelChanger(myCourse, "MyCourse");
         addPanelChanger(makeAppointment, "Appointment");
 
+        aboutUs.addActionListener(e -> {
+            ImageIcon mem = new ImageIcon("Member2.jpg");
+            String Intro = "Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka" + "\n" + "XXX";
+            JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL01, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
+        });
+
         logout.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Successfully Logout", "Logout Success", JOptionPane.INFORMATION_MESSAGE);
             G26MainStream.logout();

@@ -1,14 +1,18 @@
 package project.oop.g26.courses;
 
 import project.oop.g26.G26LoginUser;
+import project.oop.g26.csv.G26CSVUtils;
+import project.oop.g26.csv.G26CSVWriter;
 import project.oop.g26.misc.G26Utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class G26Course {
     private final String name;
@@ -27,6 +31,9 @@ public class G26Course {
         this.createRecordFunc = createRecordFunc;
         this.csv = new File(fileName + ".csv");
         if (csv.createNewFile()) G26Utils.debug("Successfully create csv file for " + name);
+        try (G26CSVWriter writer = new G26CSVWriter(csv)) {
+            writer.write(columns);
+        }
     }
 
     public void addRecord(G26LoginUser user) {
@@ -43,27 +50,14 @@ public class G26Course {
     }
 
     public void outPutRecords() {
-        try (PrintWriter writer = new PrintWriter(new FileOutputStream(csv))) {
-            writer.println(String.join(",", columns));
-            record.forEach((l, str) -> writer.println(l + "," + String.join(",", str)));
-        } catch (IOException e) {
-            e.printStackTrace();
-            G26Utils.debug("Error: " + e.getMessage());
-        }
+        G26CSVUtils.fastWrite(csv, record.entrySet().stream().map(s -> (s.getKey().toString() + "," + String.join(",", s.getValue())).split(",")).collect(Collectors.toList()));
     }
 
     public void loadRecords() {
         this.record.clear();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(csv)))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] record = line.split(",");
-                long uid = Long.parseLong(record[0]);
-                this.record.putIfAbsent(uid, Arrays.copyOfRange(record, 1, record.length));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            G26Utils.debug("Error: " + e.getMessage());
+        for (String[] record : G26CSVUtils.fastRead(csv)) {
+            long uid = Long.parseLong(record[0]);
+            this.record.putIfAbsent(uid, Arrays.copyOfRange(record, 1, record.length));
         }
     }
 

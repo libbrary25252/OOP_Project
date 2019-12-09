@@ -14,20 +14,31 @@ public enum G26ERole implements G26IRole {
     GUSER(new G26GUser());
 
 
-    private static Map<String, G26IRole> customRoles = new HashMap<>();
     private G26IRole role;
 
     G26ERole(G26IRole role) {
         this.role = role;
     }
 
+    private static Map<String, G26IRole> customRoles = new HashMap<>();
+
     static {
         customRoles.put(ADMINISTRATOR.toString().toLowerCase(), ADMINISTRATOR);
         customRoles.put(GUSER.toString().toLowerCase(), GUSER);
     }
 
-    public static void addRoles(String name, G26IRole role) {
-        customRoles.put(name, role);
+    public static void addRoles(String name, String info, G26Permission... permissions) {
+        customRoles.put(name, new G26IRole() {
+            @Override
+            public String getUserInfo() {
+                return info;
+            }
+
+            @Override
+            public G26Permission[] getPermissions() {
+                return permissions;
+            }
+        });
     }
 
     public static G26IRole getCustomRole(String name) {

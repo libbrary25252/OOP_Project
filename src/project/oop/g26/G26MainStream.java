@@ -35,6 +35,10 @@ public class G26MainStream {
         panelManger.showPanel("Login");
     }
 
+    public static boolean isLogged() {
+        return stream != null;
+    }
+
     public static G26CourseManager getCourseManager() {
         return courseManager;
     }

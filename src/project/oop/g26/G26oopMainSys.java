@@ -10,7 +10,7 @@ import project.oop.g26.panels.G26MainPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class G26MainSys {
+public class G26oopMainSys {
     public static void main(String[] args) {
         G26Utils.registerParse(Float.class, Float::parseFloat);
         G26Utils.registerParse(Integer.class, Integer::parseInt);
@@ -23,7 +23,7 @@ public class G26MainSys {
             e.printStackTrace();
         }
 
-        JFrame frame = new JFrame("Panel");
+        JFrame frame = new JFrame("System Panel");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Dimension d = new Dimension(700, 500);
         frame.setSize(d);

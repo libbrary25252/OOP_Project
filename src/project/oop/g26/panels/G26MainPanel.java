@@ -14,7 +14,6 @@ public final class G26MainPanel extends G26IPanel {
         JLabel w = new JLabel();
         w.setText(G26HtmlTextBuilder.create("Welcome to the programming course system!").setFontSize(10).setColor(Color.GREEN).build());
         JButton loginRecord = new JButton(G26HtmlTextBuilder.create("My Login Record").setFontSize(15).build());
-        JButton makeAppointment = new JButton(G26HtmlTextBuilder.create("Make Appointment").setFontSize(15).build());
         JButton aboutUs = new JButton(G26HtmlTextBuilder.create("About us").setFontSize(15).build());
         JButton myCourse = new JButton(G26HtmlTextBuilder.create("My Course").setFontSize(15).build());
         JButton profile = new JButton(G26HtmlTextBuilder.create("My Profile").setFontSize(15).build());
@@ -24,21 +23,23 @@ public final class G26MainPanel extends G26IPanel {
         profile.setBounds(20, 100, 160, 120);
         myCourse.setBounds(240, 100, 160, 120);
         loginRecord.setBounds(460, 100, 160, 120);
-        makeAppointment.setBounds(20, 250, 160, 120);
         aboutUs.setBounds(240, 250, 160, 120);
         logout.setBounds(560, 400, 80, 20);
 
-        addComponents(w, profile, myCourse, loginRecord, aboutUs, logout, makeAppointment);
+        addComponents(w, profile, myCourse, loginRecord, aboutUs, logout);
 
         addPanelChanger(profile, "Profile");
         addPanelChanger(myCourse, "MyCourse");
-        addPanelChanger(makeAppointment, "Appointment");
 
         aboutUs.addActionListener(e -> {
             ImageIcon mem = new ImageIcon("Member2.jpg");
-            String Intro = "Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka" + "\n" + "XXX";
+            String Intro = "Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka " + "\n" + "XXX";
             JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL01, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
         });
+
+        //loginRecord.addActionListener(e -> {
+
+        //});
 
         logout.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Successfully Logout", "Logout Success", JOptionPane.INFORMATION_MESSAGE);

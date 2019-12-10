@@ -4,6 +4,7 @@ public final class G26UserPanel extends G26IPanel {
 
     @Override
     protected void initGUI() {
+//name//role//Birth
 
     }
 }

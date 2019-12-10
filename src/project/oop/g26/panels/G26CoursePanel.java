@@ -31,6 +31,7 @@ public final class G26CoursePanel extends G26IPanel {
             tabbedPane.addTab(language, null, pane, null);
         }
 
+
         JButton Back = new JButton("Back");
         Back.setBounds(620, 400, 60, 20);
         addComponents(Course, tabbedPane, Back);

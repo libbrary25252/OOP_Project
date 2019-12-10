@@ -19,12 +19,13 @@ public final class G26MainPanel extends G26IPanel {
     @Override
     protected void initGUI() {
         JLabel w = new JLabel();
-        w.setText(G26m4HtmlTextBuilder.create("Welcome to the programming course system!").setFontSize(10).setColor(Color.GREEN).build());
+        w.setText(G26m4HtmlTextBuilder.create("Welcome to Our Programming Learning Platform").setFontSize(10).setColor(Color.GREEN).build());
         JButton loginRecord = new JButton(G26m4HtmlTextBuilder.create("My Login Record").setFontSize(15).build());
         JButton aboutUs = new JButton(G26m4HtmlTextBuilder.create("About us").setFontSize(15).build());
         JButton myCourse = new JButton(G26m4HtmlTextBuilder.create("My Course").setFontSize(15).build());
         JButton profile = new JButton(G26m4HtmlTextBuilder.create("My Profile").setFontSize(15).build());
         JButton UserAc = new JButton(G26m4HtmlTextBuilder.create("User Account").setFontSize(15).build());
+        JButton G26m4R = new JButton(G26m4HtmlTextBuilder.create("G26m4 Role Panel").setFontSize(15).build());
         JButton logout = new JButton(G26m4HtmlTextBuilder.create("Logout").setFontSize(7).build());
 
         w.setBounds(10, 10, 500, 20);
@@ -33,13 +34,15 @@ public final class G26MainPanel extends G26IPanel {
         loginRecord.setBounds(460, 100, 160, 120);
         aboutUs.setBounds(20, 250, 160, 120);
         UserAc.setBounds(240, 250, 160, 120);
+        G26m4R.setBounds(460, 250, 160, 120);
         logout.setBounds(560, 400, 80, 20);
 
-        addComponents(w, profile, myCourse, loginRecord, aboutUs, UserAc,logout);
+        addComponents(w, profile, myCourse, loginRecord, aboutUs, UserAc, G26m4R,logout);
 
         addPanelChanger(profile, "Profile");
         addPanelChanger(myCourse, "MyCourse");
         addPanelChanger(UserAc, "UserAccount");
+        addPanelChanger(G26m4R, "RolePanel");
 
 
         aboutUs.addActionListener(e -> {
@@ -69,7 +72,7 @@ public final class G26MainPanel extends G26IPanel {
                     panel.add(delButton, RIGHT_ALIGNMENT);
                     deletionLinkTable(delButton, table, LR);
                 }
-                JOptionPane.showMessageDialog(this, panel, "Login Record", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, panel, "My Login Record", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

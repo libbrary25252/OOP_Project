@@ -4,10 +4,7 @@ import project.oop.g26.courses.G26Course;
 import project.oop.g26.manager.G26CourseManager;
 import project.oop.g26.manager.G26PanelManger;
 import project.oop.g26.misc.G26Utils;
-import project.oop.g26.panels.G26CoursePanel;
-import project.oop.g26.panels.G26LoginPanel;
-import project.oop.g26.panels.G26MainPanel;
-import project.oop.g26.panels.G26ProfilePanel;
+import project.oop.g26.panels.*;
 import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
@@ -46,6 +43,7 @@ public class G26oopMainSys {
         panelManager.addPanel("Login", new G26LoginPanel());
         panelManager.addPanel("Profile", new G26ProfilePanel());
         panelManager.addPanel("MyCourse", new G26CoursePanel());
+        panelManager.addPanel("UserAccount",new G26UserPanel());
 
 
         G26Course java = G26Course.Builder.name("Java")

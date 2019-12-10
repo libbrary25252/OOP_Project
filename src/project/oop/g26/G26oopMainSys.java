@@ -12,6 +12,7 @@ import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.function.Function;
 
 public class G26oopMainSys {
     public static void main(String[] args) {
@@ -48,27 +49,32 @@ public class G26oopMainSys {
         panelManager.addPanel("MyCourse", new G26CoursePanel());
 
 
+        final String[] header = {"AR_ID", "U_ID", "Reversed Time", "Recorded", "Remarks"};
+        final Function<G26LoginUser, Object[]> createFunction = g26LoginUser -> {
+            String[] timeSlots = {"11:30-13:00", "13:00-14:30", "14:30-16:00", "16:00-17:30"};
+            JComboBox<String> comboBox = new JComboBox<>(timeSlots);
+            String slot = JOptionPane.showInputDialog(null, comboBox, timeSlots[0]);
+            String remark = JOptionPane.showInputDialog("Any Remarks? ", "-");
+            return new Object[]{G26Utils.getRandomId(), g26LoginUser.getU_ID(), slot, System.currentTimeMillis(), remark};
+        };
+
         G26Course java = G26Course.Builder.name("Java")
-                .columns("AR_ID", "U_ID", "Reversed Time", "Appointment Type", "Recorded", "Remarks")
+                .columns(header)
                 .info("java java")
                 .fileName("G26M1Lam")
                 .showAboutUs(component -> {
                     JOptionPane.showMessageDialog(component, "this is about us");
                 })
-                .create(loginUser -> {
-                    return new String[0];
-                }).build();
-        
+                .create(createFunction).build();
+
         G26Course C = G26Course.Builder.name("C")
-                .columns("AR_ID", "U_ID", "Reversed Time", "Appointment Type", "Recorded", "Remarks")
+                .columns(header)
                 .info("a computer programming book written by Brian Kernighan and Dennis Ritchie, the latter of whom originally designed and implemented the language, as well as co-designed the Unix operating system with which development of the language was closely intertwined. The book was central to the development and popularization of the C programming language and is still widely read and used today. Because the book was co-authored by the original language designer, and because the first edition of the book served for many years as the de facto standard for the language, the book was regarded by many to be the authoritative reference on C.")
                 .fileName("G26M4Liu")
                 .showAboutUs(component -> {
                     JOptionPane.showMessageDialog(component, "this is about us");
                 })
-                .create(loginUser -> {
-                    return new String[0];
-                }).build();
+                .create(createFunction).build();
 
         G26MainStream.setCourseManager(courseManager);
         G26MainStream.setPanelManger(panelManager);

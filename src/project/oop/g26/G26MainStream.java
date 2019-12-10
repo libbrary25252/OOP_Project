@@ -32,6 +32,7 @@ public class G26MainStream {
 
     public static void logout() {
         stream = null;
+        //System.exit(0);
         panelManger.endSession();
         panelManger.showPanel("Login");
     }

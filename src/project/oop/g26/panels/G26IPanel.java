@@ -39,6 +39,7 @@ public abstract class G26IPanel extends JPanel {
 
     public void resetUI() {
         this.initialized = false;
+        removeAll();
     }
 
     private void setOnClick(G26PanelManger manger) {

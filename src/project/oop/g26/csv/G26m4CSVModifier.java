@@ -39,6 +39,20 @@ public final class G26m4CSVModifier implements Flushable, Closeable {
         this.remove(0, ids);
     }
 
+    public void modify(int row, int column, Object data) {
+        String[] arr = this.caches.remove(row);
+        arr[column] = data.toString();
+        this.caches.add(row, arr);
+    }
+
+    public int getPos(int pos, Object id) {
+        List<String[]> list = getCachesClone();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i)[pos].equalsIgnoreCase(id.toString())) return i;
+        }
+        return -1;
+    }
+
     @SafeVarargs
     public final <T> void append(T... line) {
         caches.add(toStringArray(line));
@@ -55,7 +69,7 @@ public final class G26m4CSVModifier implements Flushable, Closeable {
     }
 
     @SafeVarargs
-    public final <T> void set(int pos, T... line) {
+    public final <T> void modify(int pos, T... line) {
         caches.set(pos, toStringArray(line));
     }
 

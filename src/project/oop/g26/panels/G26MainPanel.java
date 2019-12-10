@@ -4,6 +4,7 @@ import project.oop.g26.G26LoginUser;
 import project.oop.g26.G26MainStream;
 import project.oop.g26.csv.G26m4CSVReader;
 import project.oop.g26.misc.G26m4HtmlTextBuilder;
+import project.oop.g26.misc.G26m4ImageIconPool;
 import project.oop.g26.misc.G26m4Permission;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public final class G26MainPanel extends G26IPanel {
 
 
         aboutUs.addActionListener(e -> {
-            ImageIcon mem = new ImageIcon("Member2.jpg");
+            ImageIcon mem = G26m4ImageIconPool.getImage("group");
             String Intro = ("Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka Hing" + "\n" + "LAM Chak Wai");
             JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL01, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
         });

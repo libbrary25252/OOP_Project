@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class G26PanelManger {
 
     private final JFrame frame;
+    //private G26IPanel current;
 
     public G26PanelManger(JFrame frame) {
         this.frame = frame;
@@ -23,7 +24,7 @@ public class G26PanelManger {
     }
 
     public void showPanel(String name) {
-        this.showPanel(name, 200);
+        this.showPanel(name, 50);
     }
 
     public void showPanel(String name, long delay) {
@@ -33,10 +34,14 @@ public class G26PanelManger {
         }
         G26IPanel panel = panelMap.get(name);
         panel.launchUI(this);
+        //if (current != null ) current.resetUI();
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                frame.revalidate();
+                frame.repaint();
                 frame.setContentPane(panel);
+                //current = panel;
             }
         }, delay);
     }

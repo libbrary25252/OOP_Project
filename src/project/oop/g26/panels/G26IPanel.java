@@ -39,7 +39,20 @@ public abstract class G26IPanel extends JPanel {
 
     public void resetUI() {
         this.initialized = false;
-        removeAll();
+        new SwingWorker<>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                removeAll();
+                revalidate();
+                repaint();
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                setVisible(false);
+            }
+        }.execute();
     }
 
     private void setOnClick(G26PanelManger manger) {

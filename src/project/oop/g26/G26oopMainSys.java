@@ -59,16 +59,6 @@ public class G26oopMainSys {
                     return new String[0];
                 }).build();
         
-        G26Course java = G26Course.Builder.name("C")
-                .columns("AR_ID", "U_ID", "Reversed Time", "Appointment Type", "Recorded", "Remarks")
-                .info("C")
-                .fileName("G26M4Liu")
-                .showAboutUs(component -> {
-                    JOptionPane.showMessageDialog(component, "this is about us");
-                })
-                .create(loginUser -> {
-                    return new String[0];
-                }).build();
 
         G26MainStream.setCourseManager(courseManager);
         G26MainStream.setPanelManger(panelManager);

@@ -8,6 +8,7 @@ import project.oop.g26.misc.G26Utils;
 import project.oop.g26.roles.G26IRole;
 import project.oop.g26.roles.G26m4ERole;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -83,6 +84,12 @@ public class G26LoginUser {
             if (pos == -1) return "Cannot find user with this id";
             modifier.modify(0, column, data);
             modifier.writeAll();
+            if (G26MainStream.getStream().getLoginUser().getU_ID() == id) {
+                int i = JOptionPane.showConfirmDialog(null, "You information has been edited, you must logged out to affect", "Your information changed", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (i == JOptionPane.OK_OPTION) {
+                    G26MainStream.logout();
+                }
+            }
             return null;
         } catch (IOException e) {
             e.printStackTrace();

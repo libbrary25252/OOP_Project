@@ -7,7 +7,7 @@ import project.oop.g26.misc.G26m4Permission;
 import javax.swing.*;
 import java.awt.*;
 
-public class G26m2Python extends G26CoursePane {
+public final class G26m2Python extends G26CoursePane {
     public G26m2Python(G26Course g26Course) {
         super(g26Course);
     }

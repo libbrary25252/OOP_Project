@@ -66,7 +66,7 @@ public class G26oopMainSys {
         G26Course java = G26Course.Builder.name("Java")
                 .columns(header)
                 .info("Java is an object-oriented, cross platform, multi-purpose programming language produced by Sun Microsystems.",
-                        " First released in 1995, it was developed to be a machine independent web technology.")
+                        "First released in 1995, it was developed to be a machine independent web technology.")
                 .fileName("G26M4Lam")
                 .showAboutMe(component -> {
                     ImageIcon mem = new ImageIcon("Member2.jpg");
@@ -93,7 +93,7 @@ public class G26oopMainSys {
         G26Course Cpp = G26Course.Builder.name("C++")
                 .columns(header)
                 .info("C++ is an intermediate level language, as it comprises a confirmation of both high level and low level language features.",
-                        " C++ is a statically typed, free form, multiparadigm, compiled general-purpose language.")
+                        "C++ is a statically typed, free form, multiparadigm, compiled general-purpose language.")
                 .fileName("G26M1Ng")
                 .showAboutMe(component -> {
                     try {
@@ -109,7 +109,7 @@ public class G26oopMainSys {
         G26Course py = G26Course.Builder.name("Python")
                 .columns(header)
                 .info("Python is a widely used general-purpose, high level programming language.",
-                        " It was initially designed by Guido van Rossum in 1991 and developed by Python Software Foundation.")
+                        "It was initially designed by Guido van Rossum in 1991 and developed by Python Software Foundation.")
                 .fileName("G26M2Lin")
                 .showAboutMe(component -> {
                     try {

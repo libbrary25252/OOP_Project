@@ -1,14 +1,15 @@
 package project.oop.g26.roles;
 
-import project.oop.g26.misc.G26Permission;
+import project.oop.g26.misc.G26m4Permission;
 
 final class G26GUser implements G26IRole {
 
-    private G26Permission[] permissions;
+    private G26m4Permission[] permissions;
 
     public G26GUser() {
-        this.permissions = new G26Permission[]{
-                G26Permission.ADD_APPOINTMENT,
+        this.permissions = new G26m4Permission[]{
+                G26m4Permission.ADD_APPOINTMENT,
+                G26m4Permission.DELETE_APPOINTMENT,
         };
     }
 
@@ -18,7 +19,7 @@ final class G26GUser implements G26IRole {
     }
 
     @Override
-    public G26Permission[] getPermissions() {
+    public G26m4Permission[] getPermissions() {
         return permissions;
     }
 }

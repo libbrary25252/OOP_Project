@@ -1,6 +1,6 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.misc.G26HtmlTextBuilder;
+import project.oop.g26.misc.G26m4HtmlTextBuilder;
 
 import javax.swing.*;
 
@@ -12,7 +12,7 @@ public final class G26CoursePanel extends G26IPanel {
     protected void initGUI() {
         setLayout(null);
 
-        JLabel Course = new JLabel(G26HtmlTextBuilder.create("My Course: You can view your course and make appointment").setFontSize(7).build());
+        JLabel Course = new JLabel(G26m4HtmlTextBuilder.create("My Course: You can view your course and make appointment").setFontSize(7).build());
         Course.setHorizontalAlignment(SwingConstants.LEFT);
         Course.setBounds(10, 10, 500, 20);
 
@@ -28,7 +28,7 @@ public final class G26CoursePanel extends G26IPanel {
 
         JPanel panel2 =new JPanel();
         tabbedPane.addTab("Make Appointment",null, panel2, null);
-        JLabel chooseC = new JLabel(G26HtmlTextBuilder.create("Which language course you want to make appointment?").setFontSize(15).build());
+        JLabel chooseC = new JLabel(G26m4HtmlTextBuilder.create("Which language course you want to make appointment?").setFontSize(15).build());
         chooseC.setBounds(12,48,600,30);
         JButton Java = new JButton("Java");
         JButton Python = new JButton("Python");

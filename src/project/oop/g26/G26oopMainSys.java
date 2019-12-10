@@ -8,23 +8,26 @@ import project.oop.g26.panels.G26CoursePanel;
 import project.oop.g26.panels.G26LoginPanel;
 import project.oop.g26.panels.G26MainPanel;
 import project.oop.g26.panels.G26ProfilePanel;
+import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class G26oopMainSys {
     public static void main(String[] args) {
+
         G26Utils.registerParse(Float.class, Float::parseFloat);
         G26Utils.registerParse(Integer.class, Integer::parseInt);
 
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            G26LoginUser.generateDefaultFiles();
+            G26m4ERole.generateDefaultFiles();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        G26LoginUser.generateDefaultFiles();
 
         JFrame frame = new JFrame("System Panel");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class G26CSVUtils {
+public final class G26m4CSVUtils {
 
     public static List<String[]> fastRead(File csv) {
-        try (G26CSVReader reader = new G26CSVReader(csv)) {
+        try (G26m4CSVReader reader = new G26m4CSVReader(csv)) {
             return reader.stream().collect(Collectors.toList());
         } catch (IOException e) {
             return new ArrayList<>();
@@ -17,7 +17,7 @@ public final class G26CSVUtils {
     }
 
     public static boolean fastWrite(File csv, List<String[]> list) {
-        try (G26CSVWriter writer = new G26CSVWriter(csv)) {
+        try (G26m4CSVWriter writer = new G26m4CSVWriter(csv)) {
             writer.writes(list);
             return true;
         } catch (IOException e) {

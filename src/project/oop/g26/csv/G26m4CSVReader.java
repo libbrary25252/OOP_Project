@@ -5,14 +5,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class G26CSVReader implements Closeable, Iterable<String[]>, Flushable {
+public final class G26m4CSVReader implements Closeable, Iterable<String[]>, Flushable {
 
     private BufferedReader reader;
     private Map<Integer, String[]> cache;
     private String[] header;
     private File csv;
 
-    public G26CSVReader(File csv) throws IOException {
+    public G26m4CSVReader(File csv) throws IOException {
         if (!csv.getName().endsWith(".csv")) throw new IllegalStateException(csv.getName() + " is not csv file");
         this.csv = csv;
         this.reader = new BufferedReader(new FileReader(csv));

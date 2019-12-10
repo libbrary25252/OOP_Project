@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public final class G26CSVModifier implements Flushable, Closeable {
+public final class G26m4CSVModifier implements Flushable, Closeable {
 
     private List<String[]> caches;
     private String[] header;
     private File csv;
 
-    public G26CSVModifier(File csv) throws IOException {
+    public G26m4CSVModifier(File csv) throws IOException {
         this.csv = csv;
         refresh();
     }
@@ -61,9 +61,17 @@ public final class G26CSVModifier implements Flushable, Closeable {
 
     public void writeAll() throws IOException {
         if (caches == null) throw new IllegalStateException("Caches is null");
-        try (G26CSVWriter csvWriter = new G26CSVWriter(csv)) {
+        try (G26m4CSVWriter csvWriter = new G26m4CSVWriter(csv)) {
             csvWriter.write(header);
             csvWriter.writes(caches);
+            csvWriter.flush();
+        }
+    }
+
+    public void writeAll(List<String[]> list) throws IOException {
+        try (G26m4CSVWriter csvWriter = new G26m4CSVWriter(csv)) {
+            csvWriter.write(header);
+            csvWriter.writes(list);
             csvWriter.flush();
         }
     }
@@ -81,7 +89,7 @@ public final class G26CSVModifier implements Flushable, Closeable {
     }
 
     public void refresh() throws IOException {
-        try (G26CSVReader csvReader = new G26CSVReader(csv)) {
+        try (G26m4CSVReader csvReader = new G26m4CSVReader(csv)) {
             caches = csvReader.readAll();
             header = csvReader.readHeader();
         }

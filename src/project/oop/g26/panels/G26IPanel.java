@@ -1,6 +1,6 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.csv.G26CSVModifier;
+import project.oop.g26.csv.G26m4CSVModifier;
 import project.oop.g26.manager.G26PanelManger;
 
 import javax.swing.*;
@@ -47,7 +47,7 @@ public abstract class G26IPanel extends JPanel {
             } else {
                 int i = JOptionPane.showConfirmDialog(table, "Are you sure want to delete the selected " + Arrays.toString(rows) + " lines ?", "Are you sure ? ", JOptionPane.OK_CANCEL_OPTION);
                 if (i == JOptionPane.OK_OPTION) {
-                    try (G26CSVModifier modifier = new G26CSVModifier(linkFile)) {
+                    try (G26m4CSVModifier modifier = new G26m4CSVModifier(linkFile)) {
                         modifier.removeLine(rows);
                         modifier.writeAll();
                         table.setModel(new DefaultTableModel(modifier.getCachesClone().toArray(String[][]::new), modifier.getHeader()) {

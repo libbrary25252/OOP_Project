@@ -3,7 +3,7 @@ package project.oop.g26;
 import project.oop.g26.courses.G26Course;
 import project.oop.g26.manager.G26CourseManager;
 import project.oop.g26.manager.G26PanelManger;
-import project.oop.g26.misc.G26Permission;
+import project.oop.g26.misc.G26m4Permission;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ public class G26MainStream {
     private static G26PanelManger panelManger;
 
     private final G26LoginUser login;
-    private final List<G26Permission> permissions;
+    private final List<G26m4Permission> permissions;
 
 
     private G26MainStream(G26LoginUser login) {
@@ -63,12 +63,12 @@ public class G26MainStream {
         return login;
     }
 
-    public boolean hasPermission(G26Permission permission) {
+    public boolean hasPermission(G26m4Permission permission) {
         return this.permissions.contains(permission);
     }
 
     public boolean hasPermission(String node) {
-        return hasPermission(G26Permission.getPermission(node));
+        return hasPermission(G26m4Permission.getPermission(node));
     }
 
     public G26Course getCourse(String course) {

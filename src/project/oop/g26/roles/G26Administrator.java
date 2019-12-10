@@ -1,6 +1,6 @@
 package project.oop.g26.roles;
 
-import project.oop.g26.misc.G26Permission;
+import project.oop.g26.misc.G26m4Permission;
 
 final class G26Administrator implements G26IRole {
 
@@ -10,7 +10,7 @@ final class G26Administrator implements G26IRole {
     }
 
     @Override
-    public G26Permission[] getPermissions() {
-        return G26Permission.values(); // administrator has all permissions
+    public G26m4Permission[] getPermissions() {
+        return G26m4Permission.values(); // administrator has all permissions
     }
 }

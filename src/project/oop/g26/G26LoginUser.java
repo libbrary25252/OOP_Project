@@ -1,12 +1,12 @@
 package project.oop.g26;
 
-import project.oop.g26.csv.G26CSVModifier;
-import project.oop.g26.csv.G26CSVReader;
-import project.oop.g26.csv.G26CSVUtils;
-import project.oop.g26.csv.G26CSVWriter;
+import project.oop.g26.csv.G26m4CSVModifier;
+import project.oop.g26.csv.G26m4CSVReader;
+import project.oop.g26.csv.G26m4CSVUtils;
+import project.oop.g26.csv.G26m4CSVWriter;
 import project.oop.g26.misc.G26Utils;
-import project.oop.g26.roles.G26ERole;
 import project.oop.g26.roles.G26IRole;
+import project.oop.g26.roles.G26m4ERole;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,41 +17,36 @@ public class G26LoginUser {
     private static File userList;
     private static File loginRecord;
 
-    public static void generateDefaultFiles() {
+    private G26LoginUser(String[] strings) {
+        this(Long.parseLong(strings[0]), strings[1], strings[2], G26m4ERole.getCustomRole(strings[3]), strings[4]);
+    }
+
+    public static File getUserList() {
+        return userList;
+    }
+
+    public static void generateDefaultFiles() throws IOException {
         File userFolder = new File("UserFolder");
         userFolder.mkdir();
         userList = new File(userFolder, "G26User.csv");
-        try {
-            if (userList.createNewFile()) {
-                G26Utils.debug("Successfully generated user file");
-                try (G26CSVWriter writer = new G26CSVWriter(userList)) {
-                    writer.writeHeader(true, "U_ID", "Encrypted_Password", "U_Name", "U_Role", "Year_Of_Birth");
-                    writer.write(G26Utils.getRandomId(), G26ERole.hashPassword("a"), "admin", G26ERole.ADMINISTRATOR, "12-09-1990");
-                    writer.write(G26Utils.getRandomId(), G26ERole.hashPassword("g"), "Default", G26ERole.GUSER, "30-06-2000");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        if (userList.createNewFile()) {
+            G26Utils.debug("Successfully generated user file");
+            try (G26m4CSVWriter writer = new G26m4CSVWriter(userList)) {
+                writer.writeHeader(true, "U_ID", "Encrypted_Password", "U_Name", "U_Role", "Year_Of_Birth");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "admin", G26m4ERole.ADMINISTRATOR, "12-09-1990");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("g"), "Default", G26m4ERole.GUSER, "30-06-2000");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            loginRecord = new File(userFolder, "G26LoginRecord.csv");
-            if (loginRecord.createNewFile()) {
-                G26Utils.debug("Successfully generated login record file");
-                try (G26CSVWriter writer = new G26CSVWriter(loginRecord)) {
-                    writer.writeHeader(true, "LR_ID", "U_ID", "Login_Time", "Remarks");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
-
-    public static void removeUser(long... u_ID) {
-        try (G26CSVModifier modifier = new G26CSVModifier(userList)) {
-            modifier.remove(u_ID);
-            modifier.writeAll();
-        } catch (IOException e) {
-            e.printStackTrace();
+        loginRecord = new File(userFolder, "G26LoginRecord.csv");
+        if (loginRecord.createNewFile()) {
+            G26Utils.debug("Successfully generated login record file");
+            try (G26m4CSVWriter writer = new G26m4CSVWriter(loginRecord)) {
+                writer.writeHeader(true, "LR_ID", "U_ID", "Login_Time", "Remarks");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -69,8 +64,13 @@ public class G26LoginUser {
     private String Encrypted_Password;
     private String U_Name;
 
-    private G26LoginUser(String[] strings) {
-        this(Long.parseLong(strings[0]), strings[1], strings[2], G26ERole.valueOf(strings[3]), strings[4]);
+    public static void removeUser(long... u_ID) {
+        try (G26m4CSVModifier modifier = new G26m4CSVModifier(userList)) {
+            modifier.remove(u_ID);
+            modifier.writeAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String Year_of_Birth;
@@ -80,8 +80,8 @@ public class G26LoginUser {
     }
 
     public static G26LoginUser tryLogin(String name, String password) {
-        String hPw = G26ERole.hashPassword(password);
-        List<String[]> strr = G26CSVUtils.fastRead(userList);
+        String hPw = G26m4ERole.hashPassword(password);
+        List<String[]> strr = G26m4CSVUtils.fastRead(userList);
         for (String[] str : strr) {
             boolean pass = str[2].equalsIgnoreCase(name) && str[1].equals(hPw);
             if (pass) {
@@ -95,8 +95,8 @@ public class G26LoginUser {
 
     public void recordLogin() {
         if (G26MainStream.isLogged()) throw new IllegalStateException("Already Logged in");
-        try (G26CSVWriter writer = new G26CSVWriter(loginRecord, true);
-             G26CSVReader reader = new G26CSVReader(loginRecord)) {
+        try (G26m4CSVWriter writer = new G26m4CSVWriter(loginRecord, true);
+             G26m4CSVReader reader = new G26m4CSVReader(loginRecord)) {
             boolean firstLogin = reader.filter(U_ID).isEmpty();
             writer.write(G26Utils.getRandomId(), U_ID, System.currentTimeMillis(), firstLogin ? "First Login" : "-");
         } catch (IOException e) {

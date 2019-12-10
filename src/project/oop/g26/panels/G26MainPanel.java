@@ -1,9 +1,10 @@
 package project.oop.g26.panels;
 
+import project.oop.g26.G26LoginUser;
 import project.oop.g26.G26MainStream;
-import project.oop.g26.csv.G26CSVReader;
-import project.oop.g26.misc.G26HtmlTextBuilder;
-import project.oop.g26.misc.G26Permission;
+import project.oop.g26.csv.G26m4CSVReader;
+import project.oop.g26.misc.G26m4HtmlTextBuilder;
+import project.oop.g26.misc.G26m4Permission;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,12 +19,12 @@ public final class G26MainPanel extends G26IPanel {
     @Override
     protected void initGUI() {
         JLabel w = new JLabel();
-        w.setText(G26HtmlTextBuilder.create("Welcome to the programming course system!").setFontSize(10).setColor(Color.GREEN).build());
-        JButton loginRecord = new JButton(G26HtmlTextBuilder.create("My Login Record").setFontSize(15).build());
-        JButton aboutUs = new JButton(G26HtmlTextBuilder.create("About us").setFontSize(15).build());
-        JButton myCourse = new JButton(G26HtmlTextBuilder.create("My Course").setFontSize(15).build());
-        JButton profile = new JButton(G26HtmlTextBuilder.create("My Profile").setFontSize(15).build());
-        JButton logout = new JButton(G26HtmlTextBuilder.create("Logout").setFontSize(7).build());
+        w.setText(G26m4HtmlTextBuilder.create("Welcome to the programming course system!").setFontSize(10).setColor(Color.GREEN).build());
+        JButton loginRecord = new JButton(G26m4HtmlTextBuilder.create("My Login Record").setFontSize(15).build());
+        JButton aboutUs = new JButton(G26m4HtmlTextBuilder.create("About us").setFontSize(15).build());
+        JButton myCourse = new JButton(G26m4HtmlTextBuilder.create("My Course").setFontSize(15).build());
+        JButton profile = new JButton(G26m4HtmlTextBuilder.create("My Profile").setFontSize(15).build());
+        JButton logout = new JButton(G26m4HtmlTextBuilder.create("Logout").setFontSize(7).build());
 
         w.setBounds(10, 10, 500, 20);
         profile.setBounds(20, 100, 160, 120);
@@ -45,13 +46,12 @@ public final class G26MainPanel extends G26IPanel {
         });
 
         loginRecord.addActionListener(e -> {
-            File userFolder = new File("UserFolder");
-            File LR = new File(userFolder, "G26LoginRecord.csv");
+            File LR = G26LoginUser.getUserList();
 
-            try (G26CSVReader reader = new G26CSVReader(LR)) {
+            try (G26m4CSVReader reader = new G26m4CSVReader(LR)) {
                 G26MainStream stream = G26MainStream.getStream();
                 final long id = stream.getLoginUser().getU_ID();
-                List<String[]> list = stream.hasPermission(G26Permission.SHOW_ALL_LOGIN_RECORD) ? reader.readAll() : reader.filter(id, 1);
+                List<String[]> list = stream.hasPermission(G26m4Permission.SHOW_ALL_LOGIN_RECORD) ? reader.readAll() : reader.filter(id, 1);
                 JTable table = new JTable(new DefaultTableModel(list.toArray(String[][]::new), reader.readHeader()) {
                     @Override
                     public boolean isCellEditable(int row, int column) {
@@ -62,7 +62,7 @@ public final class G26MainPanel extends G26IPanel {
                 JPanel panel = new JPanel();
                 panel.add(pane, CENTER_ALIGNMENT);
                 JButton delButton = new JButton("Delete");
-                if (stream.hasPermission(G26Permission.DELETE_LOGIN_RECORD)) {
+                if (stream.hasPermission(G26m4Permission.DELETE_LOGIN_RECORD)) {
                     panel.add(delButton, RIGHT_ALIGNMENT);
                     deletionLinkTable(delButton, table, LR);
                 }

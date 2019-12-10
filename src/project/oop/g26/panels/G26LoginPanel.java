@@ -2,7 +2,8 @@ package project.oop.g26.panels;
 
 import project.oop.g26.G26LoginUser;
 import project.oop.g26.G26MainStream;
-import project.oop.g26.misc.G26HtmlTextBuilder;
+import project.oop.g26.misc.G26m4HtmlTextBuilder;
+
 import javax.swing.*;
 
 ///Login GUI
@@ -12,7 +13,7 @@ public final class G26LoginPanel extends G26IPanel {
     @Override
     protected void initGUI() {
         //LOGIN
-        JLabel loginTitle = new JLabel(G26HtmlTextBuilder.create("LOGIN PAGE").setFontSize(15).build());
+        JLabel loginTitle = new JLabel(G26m4HtmlTextBuilder.create("LOGIN PAGE").setFontSize(15).build());
         //ENTER INFO
         JLabel userNameLabel = new JLabel("User Name");
         JLabel passwordLabel = new JLabel("Password");

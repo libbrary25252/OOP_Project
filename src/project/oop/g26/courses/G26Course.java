@@ -1,8 +1,8 @@
 package project.oop.g26.courses;
 
 import project.oop.g26.G26LoginUser;
-import project.oop.g26.csv.G26CSVUtils;
-import project.oop.g26.csv.G26CSVWriter;
+import project.oop.g26.csv.G26m4CSVUtils;
+import project.oop.g26.csv.G26m4CSVWriter;
 import project.oop.g26.misc.G26Utils;
 
 import javax.swing.*;
@@ -18,19 +18,19 @@ public final class G26Course {
     private final String[] columns;
     private final File csv;
     private final Function<G26LoginUser, Object[]> createRecordFunc;
-    private final String fileName;
     private final JTable table;
 
     private G26Course(String name, String[] information, String[] columns, Function<G26LoginUser, Object[]> createRecordFunc, String fileName) throws IOException {
         this.name = name;
         this.information = information;
         this.columns = columns;
-        this.fileName = fileName;
         this.createRecordFunc = createRecordFunc;
-        this.csv = new File(fileName + ".csv");
+        File folder = new File("Courses");
+        folder.mkdir();
+        this.csv = new File(folder, fileName + ".csv");
         if (csv.createNewFile()) {
             G26Utils.debug("Successfully create csv file for " + name);
-            try (G26CSVWriter writer = new G26CSVWriter(csv)) {
+            try (G26m4CSVWriter writer = new G26m4CSVWriter(csv)) {
                 writer.write(columns);
             }
         }
@@ -61,7 +61,7 @@ public final class G26Course {
             System.out.println("Validate failed. make sure your string array is same as columns name");
             return;
         }
-        try (G26CSVWriter writer = new G26CSVWriter(csv)) {
+        try (G26m4CSVWriter writer = new G26m4CSVWriter(csv)) {
             writer.write(record);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +70,7 @@ public final class G26Course {
     }
 
     public List<String[]> loadRecords() {
-        List<String[]> list = G26CSVUtils.fastRead(csv);
+        List<String[]> list = G26m4CSVUtils.fastRead(csv);
         list.remove(0);
         return list;
     }

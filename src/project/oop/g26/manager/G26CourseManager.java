@@ -15,10 +15,7 @@ public class G26CourseManager {
     }
 
     public G26Course getCourse(String courseName) {
-        if (this.currentCourse != null) this.currentCourse.outPutRecords();
-        this.currentCourse = this.courseMap.get(courseName);
-        this.currentCourse.loadRecords();
-        return currentCourse;
+        return this.courseMap.get(courseName);
     }
 
 }

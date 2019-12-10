@@ -6,18 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class G26CSVWriter implements Closeable, Flushable {
+public final class G26m4CSVWriter implements Closeable, Flushable {
 
     private PrintWriter writer;
     private File csv;
 
-    public G26CSVWriter(File csv, boolean append) throws IOException {
+    public G26m4CSVWriter(File csv, boolean append) throws IOException {
         if (!csv.getName().endsWith(".csv")) throw new IllegalStateException(csv.getName() + " is not csv file");
         this.csv = csv;
         writer = new PrintWriter(new FileWriter(csv, append));
     }
 
-    public G26CSVWriter(File csv) throws IOException {
+    public G26m4CSVWriter(File csv) throws IOException {
         this(csv, false);
     }
 

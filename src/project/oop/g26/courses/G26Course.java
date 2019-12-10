@@ -68,8 +68,8 @@ public final class G26Course {
 
     public void addRecord(G26LoginUser user) {
         Object[] record = createRecordFunc.apply(user);
-        if (record.length != columns.length) {
-            System.out.println("Validate failed. make sure your string array is same as columns name");
+        if (record == null || record.length != columns.length) {
+            JOptionPane.showMessageDialog(table, "Information Not Enough", "Add Appointment Failed", JOptionPane.WARNING_MESSAGE);
             return;
         }
         try (G26m4CSVWriter writer = new G26m4CSVWriter(csv, true)) {

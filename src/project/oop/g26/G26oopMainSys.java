@@ -52,6 +52,9 @@ public class G26oopMainSys {
                 .columns("AR_ID", "U_ID", "Reversed Time", "Appointment Type", "Recorded", "Remarks")
                 .info("java java")
                 .fileName("G26M1Lam")
+                .showAboutUs(component -> {
+                    JOptionPane.showMessageDialog(component, "this is about us");
+                })
                 .create(loginUser -> {
                     return new String[0];
                 }).build();

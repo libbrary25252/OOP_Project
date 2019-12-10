@@ -23,9 +23,10 @@ public class G26LoginUser {
         userList = new File(userFolder, "G26User.csv");
         try {
             if (userList.createNewFile()) {
+                G26Utils.debug("Successfully generated user file");
                 try (G26CSVWriter writer = new G26CSVWriter(userList)) {
                     writer.writeHeader(true, "U_ID", "Encrypted_Password", "U_Name", "U_Role", "Year_Of_Birth");
-                    writer.write(G26Utils.getRandomId(), G26ERole.hashPassword("a"), "Root", G26ERole.ADMINISTRATOR, "12-09-1990");
+                    writer.write(G26Utils.getRandomId(), G26ERole.hashPassword("a"), "admin", G26ERole.ADMINISTRATOR, "12-09-1990");
                     writer.write(G26Utils.getRandomId(), G26ERole.hashPassword("g"), "Default", G26ERole.GUSER, "30-06-2000");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -33,6 +34,7 @@ public class G26LoginUser {
             }
             loginRecord = new File(userFolder, "G26LoginRecord.csv");
             if (loginRecord.createNewFile()) {
+                G26Utils.debug("Successfully generated login record file");
                 try (G26CSVWriter writer = new G26CSVWriter(loginRecord)) {
                     writer.writeHeader(true, "LR_ID", "U_ID", "Login_Time", "Remarks");
                 } catch (IOException e) {

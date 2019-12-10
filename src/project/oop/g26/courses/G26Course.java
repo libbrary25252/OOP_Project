@@ -5,60 +5,74 @@ import project.oop.g26.csv.G26CSVUtils;
 import project.oop.g26.csv.G26CSVWriter;
 import project.oop.g26.misc.G26Utils;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
-public class G26Course {
+public final class G26Course {
     private final String name;
     private final String[] information;
     private final String[] columns;
-    private Map<Long, String[]> record = new HashMap<>();
     private final File csv;
-    private final Function<G26LoginUser, String[]> createRecordFunc;
+    private final Function<G26LoginUser, Object[]> createRecordFunc;
     private final String fileName;
+    private final JTable table;
 
-    private G26Course(String name, String[] information, String[] columns, Function<G26LoginUser, String[]> createRecordFunc, String fileName) throws IOException {
+    private G26Course(String name, String[] information, String[] columns, Function<G26LoginUser, Object[]> createRecordFunc, String fileName) throws IOException {
         this.name = name;
         this.information = information;
         this.columns = columns;
         this.fileName = fileName;
         this.createRecordFunc = createRecordFunc;
         this.csv = new File(fileName + ".csv");
-        if (csv.createNewFile()) G26Utils.debug("Successfully create csv file for " + name);
-        try (G26CSVWriter writer = new G26CSVWriter(csv)) {
-            writer.write(columns);
+        if (csv.createNewFile()) {
+            G26Utils.debug("Successfully create csv file for " + name);
+            try (G26CSVWriter writer = new G26CSVWriter(csv)) {
+                writer.write(columns);
+            }
         }
+        this.table = new JTable();
+        updateTable();
+    }
+
+    public JTable getJTable() {
+        return this.table;
+    }
+
+    public File getCsv() {
+        return csv;
+    }
+
+    public void updateTable() {
+        table.setModel(new DefaultTableModel(this.loadRecords().toArray(String[][]::new), columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
     }
 
     public void addRecord(G26LoginUser user) {
-        String[] record = createRecordFunc.apply(user);
+        Object[] record = createRecordFunc.apply(user);
         if (record.length != columns.length) {
             System.out.println("Validate failed. make sure your string array is same as columns name");
             return;
         }
-        this.record.putIfAbsent(UUID.randomUUID().getMostSignificantBits(), record);
-    }
-
-    public void removeRecord(long uid) {
-        this.record.remove(uid);
-    }
-
-    public void outPutRecords() {
-        G26CSVUtils.fastWrite(csv, record.entrySet().stream().map(s -> (s.getKey().toString() + "," + String.join(",", s.getValue())).split(",")).collect(Collectors.toList()));
-    }
-
-    public void loadRecords() {
-        this.record.clear();
-        for (String[] record : G26CSVUtils.fastRead(csv)) {
-            long uid = Long.parseLong(record[0]);
-            this.record.putIfAbsent(uid, Arrays.copyOfRange(record, 1, record.length));
+        try (G26CSVWriter writer = new G26CSVWriter(csv)) {
+            writer.write(record);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        this.updateTable();
+    }
+
+    public List<String[]> loadRecords() {
+        List<String[]> list = G26CSVUtils.fastRead(csv);
+        list.remove(0);
+        return list;
     }
 
     public String getName() {
@@ -69,16 +83,12 @@ public class G26Course {
         return information;
     }
 
-    public Map<Long, String[]> getRecord() {
-        return record;
-    }
-
 
     public static class Builder {
         private String name;
         private String[] info;
         private String[] columns;
-        private Function<G26LoginUser, String[]> func;
+        private Function<G26LoginUser, Object[]> func;
         private String fileName;
 
         private Builder(String name) {
@@ -104,7 +114,7 @@ public class G26Course {
             return this;
         }
 
-        public Builder create(Function<G26LoginUser, String[]> func) {
+        public Builder create(Function<G26LoginUser, Object[]> func) {
             this.func = func;
             return this;
         }

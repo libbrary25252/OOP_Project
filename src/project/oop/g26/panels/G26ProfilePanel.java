@@ -24,7 +24,7 @@ public final class G26ProfilePanel extends G26IPanel {
             final G26IRole uR = stream.getLoginUser().getU_Role();
             final String uBirth = stream.getLoginUser().getYear_of_Birth();
 
-            JLabel Info = new JLabel(G26m4HtmlTextBuilder.create("You can view your personal info").setFontSize(11).build());
+            JLabel Info = new JLabel(G26m4HtmlTextBuilder.create("Your personal info").setFontSize(11).build());
             Info.setBounds(10, 10, 500, 20);
 
             JLabel uName = new JLabel(G26m4HtmlTextBuilder.create("User Name: ").setFontSize(10).build());

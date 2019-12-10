@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.List;
 
 public final class G26UserPanel extends G26IPanel {
-
     @Override
     protected void initGUI() {
         JPanel panel = new JPanel();
@@ -32,8 +31,27 @@ public final class G26UserPanel extends G26IPanel {
 
             panel.add(new JScrollPane(table), CENTER_ALIGNMENT);
 
+            if (Ustream.hasPermission(G26m4Permission.MODIFY_USER_ACCOUNT)) {
+                JButton MacButton = new JButton("Modify User Account");
+                add(MacButton);
+                MacButton.addActionListener(e -> {
+                    String[] function = {" Name", "Role", " Year of Birth"};
+                    JComboBox<String> cB = new JComboBox<>(function);
+                });
 
+                JButton AddButton = new JButton("Add User Account");
+                add(AddButton);
+                AddButton.addActionListener(e ->{
+
+                });
+
+
+                JButton DelButton = new JButton("Delete User Account");
+                add(DelButton);
+                deletionLinkTable(DelButton, table, UR);
+            }
             add(panel);
+
 
         } catch (IOException e) {
             e.printStackTrace();

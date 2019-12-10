@@ -5,13 +5,13 @@ import project.oop.g26.manager.G26CourseManager;
 import project.oop.g26.manager.G26PanelManger;
 import project.oop.g26.misc.G26Utils;
 import project.oop.g26.misc.G26m4HtmlTextBuilder;
+import project.oop.g26.misc.G26m4ImageIconPool;
 import project.oop.g26.panels.*;
 import project.oop.g26.panels.courses.*;
 import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.function.Function;
 
@@ -26,6 +26,8 @@ public class G26oopMainSys {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             G26LoginUser.generateDefaultFiles();
             G26m4ERole.generateDefaultFiles();
+            G26m4ImageIconPool.addImage("group", new URL("https://media.discordapp.net/attachments/653979952236199938/654016641704787988/Member2.jpg"));
+            G26m4ImageIconPool.addImage("liu", new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,8 +71,8 @@ public class G26oopMainSys {
                         "First released in 1995, it was developed to be a machine independent web technology.")
                 .fileName("G26M4Lam")
                 .showAboutMe(component -> {
-                    ImageIcon mem = new ImageIcon("Member2.jpg");
-                    String Intro = G26m4HtmlTextBuilder.create("A Little programmer who know java, javascript, typescript, python, C#").setFontSize(7).build();
+                    ImageIcon mem = G26m4ImageIconPool.getImage("group");
+                    String Intro = G26m4HtmlTextBuilder.create("A Little programmer who know java, javascript, typescript, python, C#").setFontSize(10).build();
                     JOptionPane.showMessageDialog(null, Intro, "About Me: Lam Chak Wai, Eric", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();
@@ -80,13 +82,9 @@ public class G26oopMainSys {
                 .info("C is a general-purpose high level language that was originally developed by Dennis Ritchie for the Unix operating system.")
                 .fileName("G26M3Liu")
                 .showAboutMe(component -> {
-                    try {
-                        ImageIcon mem = new ImageIcon(new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
-                        String Intro = "Hello, I am Keith Liu";
-                        JOptionPane.showMessageDialog(null, Intro, "About Me: Liu Tin Nok, Keith", JOptionPane.INFORMATION_MESSAGE, mem);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
+                    ImageIcon mem = G26m4ImageIconPool.getImage("liu");
+                    String Intro = "Hello, I am Keith Liu";
+                    JOptionPane.showMessageDialog(null, Intro, "About Me: Liu Tin Nok, Keith", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();
 
@@ -96,13 +94,9 @@ public class G26oopMainSys {
                         "C++ is a statically typed, free form, multiparadigm, compiled general-purpose language.")
                 .fileName("G26M1Ng")
                 .showAboutMe(component -> {
-                    try {
-                        ImageIcon mem = new ImageIcon(new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
-                        String Intro = "Hello, I am Lobby Ng";
-                        JOptionPane.showMessageDialog(null, Intro, "About Me: Ng Lai Ying, Libby", JOptionPane.INFORMATION_MESSAGE, mem);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
+                    ImageIcon mem = G26m4ImageIconPool.getImage("liu");
+                    String Intro = "Hello, I am Lobby Ng";
+                    JOptionPane.showMessageDialog(null, Intro, "About Me: Ng Lai Ying, Libby", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();
 
@@ -112,13 +106,9 @@ public class G26oopMainSys {
                         "It was initially designed by Guido van Rossum in 1991 and developed by Python Software Foundation.")
                 .fileName("G26M2Lin")
                 .showAboutMe(component -> {
-                    try {
-                        ImageIcon mem = new ImageIcon(new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
-                        String Intro = "Hello, I am Matthew Lin";
-                        JOptionPane.showMessageDialog(null, Intro, "About Me: LIN Ka Hing, Matthew", JOptionPane.INFORMATION_MESSAGE, mem);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
+                    ImageIcon mem = G26m4ImageIconPool.getImage("liu");
+                    String Intro = "Hello, I am Matthew Lin";
+                    JOptionPane.showMessageDialog(null, Intro, "About Me: LIN Ka Hing, Matthew", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();
 

@@ -15,12 +15,10 @@ import java.util.Map;
 public abstract class G26IPanel extends JPanel {
 
     private final Map<JButton, String> jumpInto = new HashMap<>();
+    private boolean initialized = false;
 
     public G26IPanel() {
-        this.initGUI();
-        setFont(Font.getFont("Microsoft Jhenghei"));
-        setVisible(true);
-        setLayout(null);
+
     }
 
     public final void addPanelChanger(JButton button, String panelName) {
@@ -29,7 +27,18 @@ public abstract class G26IPanel extends JPanel {
 
     protected abstract void initGUI();
 
-    public final void setOnClick(G26PanelManger manger) {
+    public void launchUI(G26PanelManger manger) {
+        if (!initialized) {
+            this.initGUI();
+            setFont(Font.getFont("Microsoft Jhenghei"));
+            setVisible(true);
+            setLayout(null);
+            this.setOnClick(manger);
+            this.initialized = true;
+        }
+    }
+
+    private void setOnClick(G26PanelManger manger) {
         jumpInto.forEach((k, v) -> k.addActionListener(e -> manger.showPanel(v)));
     }
 

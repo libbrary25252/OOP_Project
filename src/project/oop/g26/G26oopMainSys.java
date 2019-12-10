@@ -74,6 +74,9 @@ public class G26oopMainSys {
                 })
                 .create(createFunction).build();
 
+        courseManager.addCourse("Java", java);
+        courseManager.addCourse("C", C);
+
         G26MainStream.setCourseManager(courseManager);
         G26MainStream.setPanelManger(panelManager);
 

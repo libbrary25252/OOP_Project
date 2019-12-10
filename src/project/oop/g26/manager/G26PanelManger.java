@@ -16,10 +16,9 @@ public class G26PanelManger {
         this.frame = frame;
     }
 
-    private Map<String, JPanel> panelMap = new ConcurrentHashMap<>();
+    private Map<String, G26IPanel> panelMap = new ConcurrentHashMap<>();
 
     public void addPanel(String name, G26IPanel panel) {
-        panel.setOnClick(this);
         this.panelMap.put(name, panel);
     }
 
@@ -32,10 +31,12 @@ public class G26PanelManger {
             System.out.println("Panel " + name + " does not exist!");
             return;
         }
+        G26IPanel panel = panelMap.get(name);
+        panel.launchUI(this);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                frame.setContentPane(panelMap.get(name));
+                frame.setContentPane(panel);
             }
         }, delay);
     }

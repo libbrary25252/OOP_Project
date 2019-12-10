@@ -25,6 +25,10 @@ public class G26LoginUser {
         return userList;
     }
 
+    public static File getLoginRecord() {
+        return loginRecord;
+    }
+
     public static void generateDefaultFiles() throws IOException {
         File userFolder = new File("UserFolder");
         userFolder.mkdir();

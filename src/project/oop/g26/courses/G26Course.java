@@ -1,15 +1,18 @@
 package project.oop.g26.courses;
 
 import project.oop.g26.G26LoginUser;
-import project.oop.g26.csv.G26m4CSVUtils;
+import project.oop.g26.G26MainStream;
+import project.oop.g26.csv.G26m4CSVReader;
 import project.oop.g26.csv.G26m4CSVWriter;
 import project.oop.g26.misc.G26Utils;
+import project.oop.g26.misc.G26m4Permission;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -38,8 +41,7 @@ public final class G26Course {
                 writer.write(columns);
             }
         }
-        this.table = new JTable();
-        updateTable();
+        this.table = new JTable(new String[0][0], columns);
     }
 
     public JTable getJTable() {
@@ -70,7 +72,7 @@ public final class G26Course {
             System.out.println("Validate failed. make sure your string array is same as columns name");
             return;
         }
-        try (G26m4CSVWriter writer = new G26m4CSVWriter(csv)) {
+        try (G26m4CSVWriter writer = new G26m4CSVWriter(csv, true)) {
             writer.write(record);
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,9 +81,13 @@ public final class G26Course {
     }
 
     public List<String[]> loadRecords() {
-        List<String[]> list = G26m4CSVUtils.fastRead(csv);
-        list.remove(0);
-        return list;
+        G26MainStream stream = G26MainStream.getStream();
+        try (G26m4CSVReader reader = new G26m4CSVReader(csv)) {
+            return stream.hasPermission(G26m4Permission.SHOW_ALL_APPOINTMENT) ? reader.readAll() : reader.filter(stream.getLoginUser().getU_ID());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
     public String getName() {

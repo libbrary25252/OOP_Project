@@ -49,7 +49,7 @@ public final class G26MainPanel extends G26IPanel {
         });
 
         loginRecord.addActionListener(e -> {
-            File LR = G26LoginUser.getUserList();
+            File LR = G26LoginUser.getLoginRecord();
 
             try (G26m4CSVReader reader = new G26m4CSVReader(LR)) {
                 G26MainStream stream = G26MainStream.getStream();
@@ -63,7 +63,7 @@ public final class G26MainPanel extends G26IPanel {
                 });
                 JScrollPane pane = new JScrollPane(table);
                 JPanel panel = new JPanel();
-                panel.add(pane, CENTER_ALIGNMENT);
+                panel.add(pane, LEFT_ALIGNMENT);
                 JButton delButton = new JButton("Delete");
                 if (stream.hasPermission(G26m4Permission.DELETE_LOGIN_RECORD)) {
                     panel.add(delButton, RIGHT_ALIGNMENT);

@@ -26,7 +26,7 @@ public final class G26MainPanel extends G26IPanel {
         JButton myCourse = new JButton(G26m4HtmlTextBuilder.create("My Course").setFontSize(15).build());
         JButton profile = new JButton(G26m4HtmlTextBuilder.create("My Profile").setFontSize(15).build());
         JButton UserAc = new JButton(G26m4HtmlTextBuilder.create("User Account").setFontSize(15).build());
-        JButton G26m4R = new JButton(G26m4HtmlTextBuilder.create("G26m4 Role Panel").setFontSize(15).build());
+        JButton G26m4R = new JButton(G26m4HtmlTextBuilder.create("Role Panel").setFontSize(15).build());
         JButton logout = new JButton(G26m4HtmlTextBuilder.create("Logout").setFontSize(7).build());
 
         w.setBounds(10, 10, 500, 20);

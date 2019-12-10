@@ -28,6 +28,8 @@ public class G26oopMainSys {
             G26m4ERole.generateDefaultFiles();
             G26m4ImageIconPool.addImage("group", new URL("https://media.discordapp.net/attachments/653979952236199938/654016641704787988/Member2.jpg"));
             G26m4ImageIconPool.addImage("liu", new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
+            G26m4ImageIconPool.addImage("libby", new URL("https://media.discordapp.net/attachments/653471789971668992/654031830869082112/IMG_4237.JPG?width=613&height=567"));
+            G26m4ImageIconPool.addImage("lam", new URL("https://cdn.discordapp.com/attachments/415882741092057088/654041177452183570/7718086048_IMG_5368.JPG"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,7 +73,7 @@ public class G26oopMainSys {
                         "First released in 1995, it was developed to be a machine independent web technology.")
                 .fileName("G26M4Lam")
                 .showAboutMe(component -> {
-                    ImageIcon mem = G26m4ImageIconPool.getImage("group");
+                    ImageIcon mem = G26m4ImageIconPool.getImage("lam");
                     String Intro = G26m4HtmlTextBuilder.create("A Little programmer who know java, javascript, typescript, python, C#").setFontSize(10).build();
                     JOptionPane.showMessageDialog(null, Intro, "About Me: Lam Chak Wai, Eric", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
@@ -94,8 +96,8 @@ public class G26oopMainSys {
                         "C++ is a statically typed, free form, multiparadigm, compiled general-purpose language.")
                 .fileName("G26M1Ng")
                 .showAboutMe(component -> {
-                    ImageIcon mem = G26m4ImageIconPool.getImage("liu");
-                    String Intro = "Hello, I am Lobby Ng";
+                    ImageIcon mem = G26m4ImageIconPool.getImage("libby");
+                    String Intro = "Hello, I am Libby Ng";
                     JOptionPane.showMessageDialog(null, Intro, "About Me: Ng Lai Ying, Libby", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();

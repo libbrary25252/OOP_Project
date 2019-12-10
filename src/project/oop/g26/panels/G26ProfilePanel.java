@@ -24,7 +24,7 @@ public final class G26ProfilePanel extends G26IPanel {
             final G26IRole uR = stream.getLoginUser().getU_Role();
             final String uBirth = stream.getLoginUser().getYear_of_Birth();
 
-            JLabel Info = new JLabel(G26m4HtmlTextBuilder.create("My Profile: You can view your personal info").setFontSize(11).build());
+            JLabel Info = new JLabel(G26m4HtmlTextBuilder.create("You can view your personal info").setFontSize(11).build());
             Info.setBounds(10, 10, 500, 20);
 
             JLabel uName = new JLabel(G26m4HtmlTextBuilder.create("User Name: ").setFontSize(10).build());
@@ -40,11 +40,11 @@ public final class G26ProfilePanel extends G26IPanel {
             UidText.setOpaque(true);
             UidText.setBackground(Color.getHSBColor(37, 9, 95));
 
-            JLabel uRText = new JLabel(uR.toString());
+            JLabel uRText = new JLabel(uR.getName() + "(" + uR.getUserInfo() + ")");
             uRText.setOpaque(true);
             uRText.setBackground(Color.getHSBColor(37, 9, 95));
 
-            JLabel uBText = new JLabel(uBirth.toString());
+            JLabel uBText = new JLabel(uBirth);
             uBText.setOpaque(true);
             uBText.setBackground(Color.getHSBColor(37, 9, 95));
 

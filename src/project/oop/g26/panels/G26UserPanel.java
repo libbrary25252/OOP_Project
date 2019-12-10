@@ -9,6 +9,7 @@ import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,14 +18,22 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public final class G26UserPanel extends G26IPanel {
+
+
     @Override
     protected void initGUI() {
+
         JPanel panel = new JPanel();
         File UR = G26LoginUser.getUserList();
         G26MainStream stream = G26MainStream.getStream();
         JTable table = new JTable();
         List<String[]> list;
         String[] header;
+        JButton MacButton = new JButton("Modify User Account");
+        JButton AddButton = new JButton("Add User Account");
+        JButton DelButton = new JButton("Delete User Account");
+
+        if (stream.hasPermission(G26m4Permission.MODIFY_USER_ACCOUNT)) {
         try (G26m4CSVReader reader = new G26m4CSVReader(UR)) {
             list = reader.readAll();
             header = reader.readHeader();
@@ -43,12 +52,6 @@ public final class G26UserPanel extends G26IPanel {
             }
         });
 
-        panel.add(new JScrollPane(table), CENTER_ALIGNMENT);
-        add(panel);
-
-        if (stream.hasPermission(G26m4Permission.MODIFY_USER_ACCOUNT)) {
-            JButton MacButton = new JButton("Modify User Account");
-            add(MacButton);
             MacButton.addActionListener(e -> {
                 if (table.getSelectedRowCount() > 1) {
                     JOptionPane.showMessageDialog(this, "Please choose only one row to edit.", "Modify Failed", JOptionPane.WARNING_MESSAGE);
@@ -99,8 +102,7 @@ public final class G26UserPanel extends G26IPanel {
                     JOptionPane.showMessageDialog(this, str, "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             });
-            JButton AddButton = new JButton("Add User Account");
-            add(AddButton);
+
             AddButton.addActionListener(e -> {
                 String name = JOptionPane.showInputDialog(this, "Input the name");
                 String pw = JOptionPane.showInputDialog(this, "Input the password");
@@ -112,11 +114,20 @@ public final class G26UserPanel extends G26IPanel {
                     JOptionPane.showMessageDialog(this, msg, "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             });
-            JButton DelButton = new JButton("Delete User Account");
-            add(DelButton);
+
             deletionLinkTable(DelButton, table, UR);
+
+            JScrollPane p = new JScrollPane(table);
+            p.setBounds(100, 30, 500, 500);
+            AddButton.setBounds(300, 200, 100, 50);
+            MacButton.setBounds(300, 300, 100, 50);
+            DelButton.setBounds(300, 400, 100, 50);
+            panel.add(p);
+            addComponents(p, AddButton, MacButton, DelButton);
+
         }
     }
+
 
     private boolean validateYearOfBirth(String yearOfb) {
         String[] date = yearOfb.split("-");
@@ -136,3 +147,4 @@ public final class G26UserPanel extends G26IPanel {
         return false;
     }
 }
+

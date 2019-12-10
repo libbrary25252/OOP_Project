@@ -37,7 +37,7 @@ public class G26oopMainSys {
 
         JFrame frame = new JFrame("System Panel");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Dimension d = new Dimension(800, 500);
+        Dimension d = new Dimension(800, 580);
         frame.setSize(d);
         frame.setMaximumSize(d);
         frame.setMinimumSize(d);

@@ -17,19 +17,17 @@ public final class G26m4Java extends G26CoursePane {
         JPanel panel = new JPanel();
         g26Course.updateTable();
         panel.add(new JScrollPane(g26Course.getJTable()), CENTER_ALIGNMENT);
-        JTextPane operation = new JTextPane();
         G26MainStream stream = G26MainStream.getStream();
         if (stream.hasPermission(G26m4Permission.ADD_APPOINTMENT)) {
-            JButton createButton = new JButton("Make \n Appointment");
-            operation.add(createButton);
+            JButton createButton = new JButton("Make Appointment");
+            add(createButton);
             createButton.addActionListener(e -> g26Course.addRecord(stream.getLoginUser()));
         }
         if (stream.hasPermission(G26m4Permission.DELETE_APPOINTMENT)) {
-            JButton delButton = new JButton("Delete \n Appointment");
-            operation.add(delButton);
+            JButton delButton = new JButton("Delete Appointment");
+            add(delButton);
             deletionLinkTable(delButton, g26Course.getJTable(), g26Course.getCsv());
         }
-        panel.add(operation, RIGHT_ALIGNMENT);
         add(panel);
     }
 }

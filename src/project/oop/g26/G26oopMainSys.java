@@ -53,7 +53,8 @@ public class G26oopMainSys {
         final Function<G26LoginUser, Object[]> createFunction = g26LoginUser -> {
             String[] timeSlots = {"11:30-13:00", "13:00-14:30", "14:30-16:00", "16:00-17:30"};
             JComboBox<String> comboBox = new JComboBox<>(timeSlots);
-            String slot = JOptionPane.showInternalInputDialog(null, comboBox);
+            JOptionPane.showMessageDialog(null, comboBox);
+            String slot = (String) comboBox.getSelectedItem();
             if (slot == null) return null;
             String remark = JOptionPane.showInputDialog("Any Remarks? ", "-");
             if (remark == null) return null;

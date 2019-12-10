@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +57,7 @@ public abstract class G26IPanel extends JPanel {
             if (rows.length == 0) {
                 JOptionPane.showMessageDialog(table, "You haven't selected any rows to delete.", "Delete Failed", JOptionPane.WARNING_MESSAGE);
             } else {
-                int i = JOptionPane.showConfirmDialog(table, "Are you sure want to delete the selected " + Arrays.toString(rows) + " lines ?", "Are you sure ? ", JOptionPane.OK_CANCEL_OPTION);
+                int i = JOptionPane.showConfirmDialog(table, "Are you sure want to delete the selected " + rows.length + " lines ?", "Are you sure ? ", JOptionPane.OK_CANCEL_OPTION);
                 if (i == JOptionPane.OK_OPTION) {
                     try (G26m4CSVModifier modifier = new G26m4CSVModifier(linkFile)) {
                         modifier.removeLine(rows);

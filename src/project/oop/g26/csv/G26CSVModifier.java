@@ -11,20 +11,28 @@ import java.util.Objects;
 
 public final class G26CSVModifier implements Flushable, Closeable {
 
-    private G26CSVWriter csvWriter;
     private List<String[]> caches;
+    private String[] header;
     private File csv;
 
     public G26CSVModifier(File csv) throws IOException {
         this.csv = csv;
-        csvWriter = new G26CSVWriter(csv);
-        G26CSVReader csvReader = new G26CSVReader(csv);
-        caches = csvReader.readAll();
+        refresh();
     }
 
     @SafeVarargs
     public final <T> void remove(int pos, T... ids) {
         caches.removeIf(s -> Arrays.stream(ids).anyMatch(id -> s[pos].equals(id + "")));
+    }
+
+    public void changeHeader(String... header) {
+        this.header = header;
+    }
+
+    public void removeLine(int... lines) {
+        for (int line : lines) {
+            this.caches.remove(line);
+        }
     }
 
     public void remove(long... ids) {
@@ -53,22 +61,35 @@ public final class G26CSVModifier implements Flushable, Closeable {
 
     public void writeAll() throws IOException {
         if (caches == null) throw new IllegalStateException("Caches is null");
-        csvWriter.writes(caches);
-        csvWriter.flush();
+        try (G26CSVWriter csvWriter = new G26CSVWriter(csv)) {
+            csvWriter.write(header);
+            csvWriter.writes(caches);
+            csvWriter.flush();
+        }
     }
 
     public List<String[]> getCachesClone() {
         return new ArrayList<>(caches);
     }
 
+    public String[] getHeader() {
+        return header;
+    }
+
     @Override
     public void close() throws IOException {
-        csvWriter.close();
+    }
+
+    public void refresh() throws IOException {
+        try (G26CSVReader csvReader = new G26CSVReader(csv)) {
+            caches = csvReader.readAll();
+            header = csvReader.readHeader();
+        }
     }
 
     @Override
     public void flush() throws IOException {
         writeAll();
-        caches = new G26CSVReader(csv).readAll();
+        refresh();
     }
 }

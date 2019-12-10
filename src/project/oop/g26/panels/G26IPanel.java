@@ -1,9 +1,14 @@
 package project.oop.g26.panels;
 
+import project.oop.g26.csv.G26CSVModifier;
 import project.oop.g26.manager.G26PanelManger;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,5 +37,30 @@ public abstract class G26IPanel extends JPanel {
         for (Component component : components) {
             add(component);
         }
+    }
+
+    protected void deletionLinkTable(JButton delButton, JTable table, File linkFile) {
+        delButton.addActionListener(e -> {
+            int[] rows = table.getSelectedRows();
+            if (rows.length == 0) {
+                JOptionPane.showMessageDialog(table, "You haven't selected any rows to delete.", "Delete Failed", JOptionPane.WARNING_MESSAGE);
+            } else {
+                int i = JOptionPane.showConfirmDialog(table, "Are you sure want to delete the selected " + Arrays.toString(rows) + " lines ?", "Are you sure ? ", JOptionPane.OK_CANCEL_OPTION);
+                if (i == JOptionPane.OK_OPTION) {
+                    try (G26CSVModifier modifier = new G26CSVModifier(linkFile)) {
+                        modifier.removeLine(rows);
+                        modifier.writeAll();
+                        table.setModel(new DefaultTableModel(modifier.getCachesClone().toArray(String[][]::new), modifier.getHeader()) {
+                            @Override
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        });
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 }

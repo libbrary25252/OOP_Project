@@ -29,7 +29,10 @@ public final class G26CSVReader implements Closeable, Iterable<String[]>, Flusha
     public String[] readHeader() throws IOException {
         if (this.header == null) {
             backToTop();
-            this.header = reader.readLine().split(",");
+            String header = reader.readLine();
+            if (header != null) {
+                this.header = header.split(",");
+            }
         }
         return this.header;
     }

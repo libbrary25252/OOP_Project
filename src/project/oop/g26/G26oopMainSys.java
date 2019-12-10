@@ -71,8 +71,6 @@ public class G26oopMainSys {
                             "A Little programmer who know java, javascript, typescript, python, C#",
                             "Now you’re probably thinking something like: “why exactly do I need Java of all options”? ",
                             "As told before, there will never be a programming language with unchallenged authority. ",
-                            "But still, you can make a choice quite easy, if you analyze the long-term benefits of mastering a certain language.",
-                            " Let’s talk about why Java is so popular and why little is going to change in the closest time. "
                     };
                     JOptionPane.showMessageDialog(null, Intro, "About Me: Eric Lam", JOptionPane.INFORMATION_MESSAGE, mem);
                 })

@@ -71,7 +71,7 @@ public enum G26m4ERole implements G26IRole {
         }
     }
 
-    public static String addRoles(String name, String info, G26m4Permission... permissions) {
+    public static String addRole(String name, String info, G26m4Permission... permissions) {
         try (G26m4CSVModifier modifier = new G26m4CSVModifier(roleList)) {
             boolean contain = modifier.getCachesClone().stream().anyMatch(s -> s[0].equalsIgnoreCase(name));
             if (!contain) {
@@ -103,6 +103,7 @@ public enum G26m4ERole implements G26IRole {
     public static G26IRole getCustomRole(String name) {
         try (G26m4CSVReader reader = new G26m4CSVReader(roleList)) {
             String[] role = reader.read(name.toUpperCase(), 0);
+            if (role == null) return null;
             return new G26IRole() {
                 @Override
                 public String getName() {

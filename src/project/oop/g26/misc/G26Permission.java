@@ -4,22 +4,21 @@ import java.util.Arrays;
 
 public enum G26Permission {
     /*
-    Account
+    Account management
      */
-    CREATE_USER_ACCOUNT,
-    DELETE_USER_ACCOUNT,
-    EDIT_OTHER_PASSWORD,
+    MODIFY_USER_ACCOUNT,
+    MODIFY_ROLE,
     /*
     main
      */
-    SHOW_ABOUT_US,
-    EDIT_PASSWORD,
+    MODIFY_LOGIN_RECORD,
+    SHOW_ALL_LOGIN_RECORD,
     /*
     Course
      */
-    ADD_RECORD,
-    DELETE_RECORD,
-    SHOW_RECORD;
+    ADD_APPOINTMENT,
+    DELETE_APPOINTMENT,
+    SHOW_ALL_APPOINTMENT;
 
     private String node;
 

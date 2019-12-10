@@ -8,7 +8,7 @@ final class G26GUser implements G26IRole {
 
     public G26GUser() {
         this.permissions = new G26Permission[]{
-                G26Permission.SHOW_ABOUT_US,
+                G26Permission.ADD_APPOINTMENT,
         };
     }
 

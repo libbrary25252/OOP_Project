@@ -2,10 +2,11 @@ package project.oop.g26.panels;
 
 import project.oop.g26.G26MainStream;
 import project.oop.g26.csv.G26CSVReader;
-import project.oop.g26.csv.G26CSVUtils;
 import project.oop.g26.misc.G26HtmlTextBuilder;
+import project.oop.g26.misc.G26Permission;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +34,8 @@ public final class G26MainPanel extends G26IPanel {
 
         addComponents(w, profile, myCourse, loginRecord, aboutUs, logout);
 
-        addPanelChanger(profile, "G26UserPanel");// cannot show the panel
-        addPanelChanger(myCourse, "G26CoursePanel");
-
+        addPanelChanger(profile, "Profile");
+        addPanelChanger(myCourse, "MyCourse");
 
 
         aboutUs.addActionListener(e -> {
@@ -48,10 +48,18 @@ public final class G26MainPanel extends G26IPanel {
             File userFolder = new File("UserFolder");
             File LR = new File(userFolder, "G26LoginRecord.csv");
 
-            try {
-                G26CSVReader reader = new G26CSVReader(LR);
-                //reader.read();////Don't know how to get UID from login;
-
+            try (G26CSVReader reader = new G26CSVReader(LR)) {
+                G26MainStream stream = G26MainStream.getStream();
+                final long id = stream.getLoginUser().getU_ID();
+                List<String[]> list = stream.hasPermission(G26Permission.SHOW_ALL_LOGIN_RECORD) ? reader.readAll() : reader.filter(id, 1);
+                JTable table = new JTable(new DefaultTableModel(list.toArray(String[][]::new), reader.readHeader()) {
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+                });
+                JScrollPane pane = new JScrollPane(table);
+                JOptionPane.showMessageDialog(this, pane, "Login Record", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

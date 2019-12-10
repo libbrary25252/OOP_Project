@@ -5,14 +5,14 @@ import project.oop.g26.misc.G26HtmlTextBuilder;
 import javax.swing.*;
 
 
-public abstract class G26CoursePanel extends G26IPanel {
+public final class G26CoursePanel extends G26IPanel {
 
 
     @Override
     protected void initGUI() {
         setLayout(null);
 
-        JLabel Course = new JLabel(G26HtmlTextBuilder.create("My Course: You can view your course and make appointment").setFontSize(15).build());
+        JLabel Course = new JLabel(G26HtmlTextBuilder.create("My Course: You can view your course and make appointment").setFontSize(7).build());
         Course.setHorizontalAlignment(SwingConstants.LEFT);
         Course.setBounds(10, 10, 500, 20);
 

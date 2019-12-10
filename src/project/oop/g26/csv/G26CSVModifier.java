@@ -6,8 +6,8 @@ import java.io.Flushable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public final class G26CSVModifier implements Flushable, Closeable {
 
@@ -22,7 +22,8 @@ public final class G26CSVModifier implements Flushable, Closeable {
         caches = csvReader.readAll();
     }
 
-    public void remove(int pos, long... ids) {
+    @SafeVarargs
+    public final <T> void remove(int pos, T... ids) {
         caches.removeIf(s -> Arrays.stream(ids).anyMatch(id -> s[pos].equals(id + "")));
     }
 
@@ -30,14 +31,30 @@ public final class G26CSVModifier implements Flushable, Closeable {
         this.remove(0, ids);
     }
 
-
-    public void append(String[]... lines) {
-        Collections.addAll(caches, lines);
+    @SafeVarargs
+    public final <T> void append(T... line) {
+        caches.add(toStringArray(line));
     }
 
-    public void writeAll() {
+    @SafeVarargs
+    public final <T> void append(int pos, T... line) {
+        caches.add(pos, toStringArray(line));
+    }
+
+    @SafeVarargs
+    private <T> String[] toStringArray(T... line) {
+        return Arrays.stream(line).map(Objects::toString).toArray(String[]::new);
+    }
+
+    @SafeVarargs
+    public final <T> void set(int pos, T... line) {
+        caches.set(pos, toStringArray(line));
+    }
+
+    public void writeAll() throws IOException {
         if (caches == null) throw new IllegalStateException("Caches is null");
         csvWriter.writes(caches);
+        csvWriter.flush();
     }
 
     public List<String[]> getCachesClone() {
@@ -51,6 +68,7 @@ public final class G26CSVModifier implements Flushable, Closeable {
 
     @Override
     public void flush() throws IOException {
+        writeAll();
         caches = new G26CSVReader(csv).readAll();
     }
 }

@@ -4,7 +4,7 @@ import project.oop.g26.misc.G26HtmlTextBuilder;
 
 import javax.swing.*;
 
-public abstract class G26ProfilePanel extends G26IPanel {
+public final class G26ProfilePanel extends G26IPanel {
     @Override
     protected void initGUI() {
 

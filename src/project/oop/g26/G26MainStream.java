@@ -59,6 +59,10 @@ public class G26MainStream {
         return Optional.ofNullable(stream).orElseThrow(() -> new IllegalStateException("User Not Login"));
     }
 
+    public G26LoginUser getLoginUser() {
+        return login;
+    }
+
     public boolean hasPermission(G26Permission permission) {
         return this.permissions.contains(permission);
     }

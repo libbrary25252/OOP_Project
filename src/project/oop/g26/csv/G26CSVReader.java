@@ -9,6 +9,7 @@ public final class G26CSVReader implements Closeable, Iterable<String[]>, Flusha
 
     private BufferedReader reader;
     private Map<Integer, String[]> cache;
+    private String[] header;
     private File csv;
 
     public G26CSVReader(File csv) throws IOException {
@@ -25,13 +26,22 @@ public final class G26CSVReader implements Closeable, Iterable<String[]>, Flusha
         return new LinkedList<>(readAllWithLines().values());
     }
 
+    public String[] readHeader() throws IOException {
+        if (this.header == null) {
+            backToTop();
+            this.header = reader.readLine().split(",");
+        }
+        return this.header;
+    }
+
     public Map<Integer, String[]> readAllWithLines() throws IOException {
         if (cache != null) return cache;
         Map<Integer, String[]> map = new TreeMap<>();
         String line;
-        int i = 0;
+        int i = -1;
         while ((line = reader.readLine()) != null) {
-            map.put(i++, line.split(","));
+            if (i > -1) map.put(i, line.split(","));
+            i++;
         }
         backToTop();
         cache = map;
@@ -86,5 +96,6 @@ public final class G26CSVReader implements Closeable, Iterable<String[]>, Flusha
     @Override
     public void flush() throws IOException {
         cache = null;
+        header = null;
     }
 }

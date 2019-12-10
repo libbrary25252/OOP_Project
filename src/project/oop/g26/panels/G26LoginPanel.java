@@ -3,11 +3,11 @@ package project.oop.g26.panels;
 import project.oop.g26.G26LoginUser;
 import project.oop.g26.G26MainStream;
 import project.oop.g26.misc.G26HtmlTextBuilder;
-
 import javax.swing.*;
 
 ///Login GUI
 public final class G26LoginPanel extends G26IPanel {
+
 
     @Override
     protected void initGUI() {
@@ -27,6 +27,7 @@ public final class G26LoginPanel extends G26IPanel {
         loginbtn.setBounds(220, 290, 100, 30);
 
         addComponents(loginTitle, userNameLabel, userId, passwordLabel, pw, loginbtn);
+
 
         loginbtn.addActionListener(e -> {
             G26LoginUser user = G26LoginUser.tryLogin(userId.getText(), new String(pw.getPassword()));

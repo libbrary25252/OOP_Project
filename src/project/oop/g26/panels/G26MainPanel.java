@@ -1,10 +1,15 @@
 package project.oop.g26.panels;
 
 import project.oop.g26.G26MainStream;
+import project.oop.g26.csv.G26CSVReader;
+import project.oop.g26.csv.G26CSVUtils;
 import project.oop.g26.misc.G26HtmlTextBuilder;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 
 public final class G26MainPanel extends G26IPanel {
@@ -23,13 +28,15 @@ public final class G26MainPanel extends G26IPanel {
         profile.setBounds(20, 100, 160, 120);
         myCourse.setBounds(240, 100, 160, 120);
         loginRecord.setBounds(460, 100, 160, 120);
-        aboutUs.setBounds(240, 250, 160, 120);
+        aboutUs.setBounds(20, 250, 160, 120);
         logout.setBounds(560, 400, 80, 20);
 
         addComponents(w, profile, myCourse, loginRecord, aboutUs, logout);
 
-        addPanelChanger(profile, "Profile");
-        addPanelChanger(myCourse, "MyCourse");
+        addPanelChanger(profile, "G26UserPanel");// cannot show the panel
+        addPanelChanger(myCourse, "G26CoursePanel");
+
+
 
         aboutUs.addActionListener(e -> {
             ImageIcon mem = new ImageIcon("Member2.jpg");
@@ -37,9 +44,21 @@ public final class G26MainPanel extends G26IPanel {
             JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL01, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
         });
 
-        //loginRecord.addActionListener(e -> {
+        loginRecord.addActionListener(e -> {
+            File userFolder = new File("UserFolder");
+            File LR = new File(userFolder, "G26LoginRecord.csv");
 
-        //});
+            try {
+                G26CSVReader reader = new G26CSVReader(LR);
+                //reader.read();////Don't know how to get UID from login;
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        });
+
+
 
         logout.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Successfully Logout", "Logout Success", JOptionPane.INFORMATION_MESSAGE);

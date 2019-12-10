@@ -28,6 +28,9 @@ public final class G26m4Java extends G26CoursePane {
             add(delButton);
             deletionLinkTable(delButton, g26Course.getJTable(), g26Course.getCsv());
         }
+        JButton aboutMe = new JButton("About Me");
+        aboutMe.addActionListener(e -> g26Course.showAboutMe(this));
+        add(aboutMe);
         add(panel);
     }
 }

@@ -53,11 +53,11 @@ public class G26oopMainSys {
         final Function<G26LoginUser, Object[]> createFunction = g26LoginUser -> {
             String[] timeSlots = {"11:30-13:00", "13:00-14:30", "14:30-16:00", "16:00-17:30"};
             JComboBox<String> comboBox = new JComboBox<>(timeSlots);
-            JOptionPane.showMessageDialog(null, comboBox);
+            JOptionPane.showMessageDialog(null, comboBox, "Select your Time Slot", JOptionPane.INFORMATION_MESSAGE);
             String slot = (String) comboBox.getSelectedItem();
             if (slot == null) return null;
-            String remark = JOptionPane.showInputDialog("Any Remarks? ", "-");
-            if (remark == null) return null;
+            String remark = JOptionPane.showInputDialog("Any Remarks? ");
+            remark = remark == null || remark.isEmpty() ? "-" : remark;
             return new Object[]{G26Utils.getRandomId(), g26LoginUser.getU_ID(), slot, System.currentTimeMillis(), remark};
         };
 
@@ -66,7 +66,15 @@ public class G26oopMainSys {
                 .info("java java")
                 .fileName("G26M1Lam")
                 .showAboutMe(component -> {
-                    JOptionPane.showMessageDialog(component, "this is about us");
+                    ImageIcon mem = new ImageIcon("Member2.jpg");
+                    String[] Intro = {
+                            "A Little programmer who know java, javascript, typescript, python, C#",
+                            "Now you’re probably thinking something like: “why exactly do I need Java of all options”? ",
+                            "As told before, there will never be a programming language with unchallenged authority. ",
+                            "But still, you can make a choice quite easy, if you analyze the long-term benefits of mastering a certain language.",
+                            " Let’s talk about why Java is so popular and why little is going to change in the closest time. "
+                    };
+                    JOptionPane.showMessageDialog(null, Intro, "About Me: Eric Lam", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();
 

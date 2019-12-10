@@ -105,6 +105,11 @@ public enum G26m4ERole implements G26IRole {
             String[] role = reader.read(name.toUpperCase(), 0);
             return new G26IRole() {
                 @Override
+                public String getName() {
+                    return name.toUpperCase();
+                }
+
+                @Override
                 public String getUserInfo() {
                     return role[1];
                 }
@@ -136,6 +141,11 @@ public enum G26m4ERole implements G26IRole {
             sb.append(String.format("%02x", b));
         }
         return sb.toString();
+    }
+
+    @Override
+    public String getName() {
+        return this.toString().toUpperCase();
     }
 
     @Override

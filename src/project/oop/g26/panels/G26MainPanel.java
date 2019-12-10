@@ -24,6 +24,7 @@ public final class G26MainPanel extends G26IPanel {
         JButton aboutUs = new JButton(G26m4HtmlTextBuilder.create("About us").setFontSize(15).build());
         JButton myCourse = new JButton(G26m4HtmlTextBuilder.create("My Course").setFontSize(15).build());
         JButton profile = new JButton(G26m4HtmlTextBuilder.create("My Profile").setFontSize(15).build());
+        JButton UserAc = new JButton(G26m4HtmlTextBuilder.create("User Account").setFontSize(15).build());
         JButton logout = new JButton(G26m4HtmlTextBuilder.create("Logout").setFontSize(7).build());
 
         w.setBounds(10, 10, 500, 20);
@@ -31,12 +32,14 @@ public final class G26MainPanel extends G26IPanel {
         myCourse.setBounds(240, 100, 160, 120);
         loginRecord.setBounds(460, 100, 160, 120);
         aboutUs.setBounds(20, 250, 160, 120);
+        UserAc.setBounds(240, 250, 160, 120);
         logout.setBounds(560, 400, 80, 20);
 
-        addComponents(w, profile, myCourse, loginRecord, aboutUs, logout);
+        addComponents(w, profile, myCourse, loginRecord, aboutUs, UserAc,logout);
 
         addPanelChanger(profile, "Profile");
         addPanelChanger(myCourse, "MyCourse");
+        addPanelChanger(UserAc, "UserAccount");
 
 
         aboutUs.addActionListener(e -> {

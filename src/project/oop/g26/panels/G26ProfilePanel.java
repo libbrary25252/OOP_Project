@@ -1,5 +1,6 @@
 package project.oop.g26.panels;
 
+import project.oop.g26.G26MainStream;
 import project.oop.g26.misc.G26m4HtmlTextBuilder;
 
 import javax.swing.*;
@@ -15,8 +16,15 @@ public final class G26ProfilePanel extends G26IPanel {
         //        //insert the JTable to Jtable
         //        // Jtable -> panel
 
+        JButton Back = new JButton("Back");
+        Back.setBounds(620, 400, 60, 20);
 
-        addComponents(Info);
+        addComponents(Info, Back);
+
+        Back.addActionListener(e -> {
+            G26MainStream.Backhome();
+        });
+
 
     }
 }

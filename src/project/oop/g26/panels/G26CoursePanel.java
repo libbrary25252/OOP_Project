@@ -1,5 +1,6 @@
 package project.oop.g26.panels;
 
+import project.oop.g26.G26MainStream;
 import project.oop.g26.misc.G26m4HtmlTextBuilder;
 
 import javax.swing.*;
@@ -22,22 +23,21 @@ public final class G26CoursePanel extends G26IPanel {
         JPanel panel = new JPanel();
         tabbedPane.addTab("Course Info",null, panel, null);
 
-        //add course info based on the UID;
-        //insert the JTable to Jtable
-        // Jtable -> panel
+        JButton Back = new JButton("Back");
+        Back.setBounds(620, 400, 60, 20);
 
-        JPanel panel2 =new JPanel();
+        JPanel panel2 = new JPanel();
         tabbedPane.addTab("Make Appointment",null, panel2, null);
-        JLabel chooseC = new JLabel(G26m4HtmlTextBuilder.create("Which language course you want to make appointment?").setFontSize(15).build());
-        chooseC.setBounds(12,48,600,30);
+        JLabel chooseC = new JLabel(G26m4HtmlTextBuilder.create("Which language course you want to make appointment?").setFontSize(11).build());
+        chooseC.setBounds(12,30,600,30);
         JButton Java = new JButton("Java");
         JButton Python = new JButton("Python");
         JButton C = new JButton("C");
         JButton c = new JButton("C++");// C++
-        Java.setBounds(15,120,60,40);
-        Python.setBounds(115,120,60,40);
-        C.setBounds(15,300,60,40);
-        c.setBounds(115,300,60,40);//C++
+        Java.setBounds(15,120,100,80);
+        Python.setBounds(115,120,100,80);
+        C.setBounds(15,210,100,80);
+        c.setBounds(115,210,100,80);//C++
         panel2.add(Java);
         panel2.add(Python);
         panel2.add(C);
@@ -48,10 +48,12 @@ public final class G26CoursePanel extends G26IPanel {
         panel2.setLayout(null);
         //add(Course);
         //add(tabbedPane);
-        addComponents(Course, tabbedPane);
+        addComponents(Course, tabbedPane, Back);
 
 
-
+        Back.addActionListener(e -> {
+            G26MainStream.Backhome();
+        });
 
 
 

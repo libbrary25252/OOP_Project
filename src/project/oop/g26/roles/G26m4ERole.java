@@ -31,8 +31,8 @@ public enum G26m4ERole implements G26IRole {
 
     public static void generateDefaultFiles() throws IOException {
         File userFolder = new File("UserFolder");
-        userFolder.mkdir();
-        roleList = new File(userFolder, "G26User.csv");
+        if (!userFolder.exists()) userFolder.mkdir();
+        roleList = new File(userFolder, "G26m1Role.csv");
         if (roleList.createNewFile()) {
             try (G26m4CSVWriter writer = new G26m4CSVWriter(roleList)) {
                 writer.writeHeader(true, "Name", "Info", "Permissions");

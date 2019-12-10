@@ -145,7 +145,7 @@ public enum G26m4ERole implements G26IRole {
 
     @Override
     public String getName() {
-        return this.toString().toUpperCase();
+        return role.getName();
     }
 
     @Override

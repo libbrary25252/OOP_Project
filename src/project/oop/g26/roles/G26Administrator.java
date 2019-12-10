@@ -5,8 +5,13 @@ import project.oop.g26.misc.G26m4Permission;
 final class G26Administrator implements G26IRole {
 
     @Override
+    public String getName() {
+        return "ADMINISTRATOR";
+    }
+
+    @Override
     public String getUserInfo() {
-        return "admin info";
+        return "A admin role that can have all permissions";
     }
 
     @Override

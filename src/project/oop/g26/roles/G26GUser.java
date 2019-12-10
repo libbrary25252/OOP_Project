@@ -14,8 +14,13 @@ final class G26GUser implements G26IRole {
     }
 
     @Override
+    public String getName() {
+        return "USER";
+    }
+
+    @Override
     public String getUserInfo() {
-        return "user info";
+        return "A Default User Role";
     }
 
     @Override

@@ -7,7 +7,7 @@ import project.oop.g26.misc.G26m4Permission;
 import javax.swing.*;
 import java.awt.*;
 
-public class G26m3C extends G26CoursePane {
+public final class G26m3C extends G26CoursePane {
     public G26m3C(G26Course g26Course) {
         super(g26Course);
     }
@@ -15,7 +15,7 @@ public class G26m3C extends G26CoursePane {
     @Override
     protected void initGUI() {
         JPanel panel = new JPanel();
-        panel.setForeground(Color.BLUE);
+        panel.setBackground(Color.cyan);
         g26Course.updateTable();
         panel.add(new JScrollPane(g26Course.getJTable()), CENTER_ALIGNMENT);
         G26MainStream stream = G26MainStream.getStream();

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public enum G26m4ERole implements G26IRole {
@@ -46,6 +45,32 @@ public enum G26m4ERole implements G26IRole {
         return Arrays.stream(permissions).map(G26m4Permission::getNode).collect(Collectors.joining("//"));
     }
 
+    public static String changeRoleInfo(String name, String info) {
+        try (G26m4CSVModifier modifier = new G26m4CSVModifier(roleList)) {
+            int pos = modifier.getPos(0, name);
+            if (pos == -1) return "Cannot find that role";
+            modifier.modify(pos, 1, info);
+            modifier.writeAll();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    public static String changePermissions(String name, G26m4Permission... permissions) {
+        try (G26m4CSVModifier modifier = new G26m4CSVModifier(roleList)) {
+            int pos = modifier.getPos(0, name);
+            if (pos == -1) return "Cannot find that role";
+            modifier.modify(pos, 2, toPermissionCSVString(permissions));
+            modifier.writeAll();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+    }
+
     public static String addRoles(String name, String info, G26m4Permission... permissions) {
         try (G26m4CSVModifier modifier = new G26m4CSVModifier(roleList)) {
             boolean contain = modifier.getCachesClone().stream().anyMatch(s -> s[0].equalsIgnoreCase(name));
@@ -67,15 +92,9 @@ public enum G26m4ERole implements G26IRole {
              G26m4CSVModifier userModifier = new G26m4CSVModifier(G26LoginUser.getUserList())) {
             modifier.remove(0, name);
             modifier.writeAll();
-            List<String[]> str = userModifier.getCachesClone();
-            for (int i = 0; i < str.size(); i++) {
-                String[] arr = str.get(i);
-                if (arr[3].equalsIgnoreCase(name)) {
-                    arr[3] = G26m4ERole.GUSER.toString();
-                    str.set(i, arr);
-                }
-            }
-            userModifier.writeAll(str);
+            int pos = userModifier.getPos(3, name);
+            userModifier.modify(pos, 3, GUSER.toString());
+            userModifier.writeAll();
         } catch (IOException e) {
             e.printStackTrace();
         }

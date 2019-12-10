@@ -38,6 +38,10 @@ public abstract class G26IPanel extends JPanel {
         }
     }
 
+    public void resetUI() {
+        this.initialized = false;
+    }
+
     private void setOnClick(G26PanelManger manger) {
         jumpInto.forEach((k, v) -> k.addActionListener(e -> manger.showPanel(v)));
     }

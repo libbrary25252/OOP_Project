@@ -21,10 +21,9 @@ public final class G26CoursePanel extends G26IPanel {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(10, 40, 600, 400);
 
-        String[] languages = {"Java", "C"};
 
         G26CourseManager manager = G26MainStream.getCourseManager();
-        for (String language : languages) {
+        for (String language : manager.getLanguages()) {
             G26CoursePane pane = new G26CoursePane(manager.getCourse(language));
             pane.initGUI();
             tabbedPane.addTab(language, null, pane, null);
@@ -34,11 +33,7 @@ public final class G26CoursePanel extends G26IPanel {
         Back.setBounds(620, 400, 60, 20);
         addComponents(Course, tabbedPane, Back);
 
-        Back.addActionListener(e -> {
-            G26MainStream.Backhome();
-        });
-
-
+        addPanelChanger(Back, "MainPanel");
 
 
     }

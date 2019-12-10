@@ -1,6 +1,5 @@
 package project.oop.g26.panels;
 
-import project.oop.g26.G26MainStream;
 import project.oop.g26.misc.G26m4HtmlTextBuilder;
 
 import javax.swing.*;
@@ -20,10 +19,7 @@ public final class G26ProfilePanel extends G26IPanel {
         Back.setBounds(620, 400, 60, 20);
 
         addComponents(Info, Back);
-
-        Back.addActionListener(e -> {
-            G26MainStream.Backhome();
-        });
+        addPanelChanger(Back, "MainPanel");
 
 
     }

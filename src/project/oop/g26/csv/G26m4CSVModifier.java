@@ -30,9 +30,7 @@ public final class G26m4CSVModifier implements Flushable, Closeable {
     }
 
     public void removeLine(int... lines) {
-        for (int line : lines) {
-            this.caches.remove(line);
-        }
+        this.caches.removeIf(s -> Arrays.stream(lines).anyMatch(l -> this.caches.indexOf(s) == l));
     }
 
     public void remove(long... ids) {

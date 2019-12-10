@@ -40,4 +40,8 @@ public class G26PanelManger {
             }
         }, delay);
     }
+
+    public void endSession() {
+        panelMap.values().forEach(G26IPanel::resetUI);
+    }
 }

@@ -3,6 +3,7 @@ package project.oop.g26.manager;
 import project.oop.g26.courses.G26Course;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class G26CourseManager {
@@ -16,6 +17,10 @@ public class G26CourseManager {
 
     public G26Course getCourse(String courseName) {
         return this.courseMap.get(courseName);
+    }
+
+    public Set<String> getLanguages() {
+        return courseMap.keySet();
     }
 
 }

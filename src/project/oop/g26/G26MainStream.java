@@ -30,13 +30,9 @@ public class G26MainStream {
         panelManger.showPanel("MainPanel");
     }
 
-    public static void Backhome() {
-        stream = null;
-        panelManger.showPanel("MainPanel");
-    }
-
     public static void logout() {
         stream = null;
+        panelManger.endSession();
         panelManger.showPanel("Login");
     }
 

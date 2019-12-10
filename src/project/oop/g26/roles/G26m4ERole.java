@@ -36,15 +36,21 @@ public enum G26m4ERole implements G26IRole {
         if (roleList.createNewFile()) {
             try (G26m4CSVWriter writer = new G26m4CSVWriter(roleList)) {
                 writer.writeHeader(true, "Name", "Info", "Permissions");
+                writer.write(G26m4ERole.ADMINISTRATOR, G26m4ERole.ADMINISTRATOR.getUserInfo(), toPermissionCSVString(G26m4ERole.ADMINISTRATOR.getPermissions()));
+                writer.write(G26m4ERole.GUSER, G26m4ERole.GUSER.getUserInfo(), toPermissionCSVString(G26m4ERole.GUSER.getPermissions()));
             }
         }
+    }
+
+    private static String toPermissionCSVString(G26m4Permission[] permissions) {
+        return Arrays.stream(permissions).map(G26m4Permission::getNode).collect(Collectors.joining("//"));
     }
 
     public static String addRoles(String name, String info, G26m4Permission... permissions) {
         try (G26m4CSVModifier modifier = new G26m4CSVModifier(roleList)) {
             boolean contain = modifier.getCachesClone().stream().anyMatch(s -> s[0].equalsIgnoreCase(name));
             if (!contain) {
-                modifier.append(name.toUpperCase(), info, Arrays.stream(permissions).map(G26m4Permission::getNode).collect(Collectors.joining("//")));
+                modifier.append(name.toUpperCase(), info, toPermissionCSVString(permissions));
                 modifier.writeAll();
                 return null;
             } else {

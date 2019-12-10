@@ -24,14 +24,14 @@ public final class G26Course {
     private final File csv;
     private final Function<G26LoginUser, Object[]> createRecordFunc;
     private final JTable table;
-    private final Consumer<Component> showAboutUs;
+    private final Consumer<Component> showAboutMe;
 
-    private G26Course(String name, String[] information, String[] columns, Function<G26LoginUser, Object[]> createRecordFunc, Consumer<Component> showAboutUs, String fileName) throws IOException {
+    private G26Course(String name, String[] information, String[] columns, Function<G26LoginUser, Object[]> createRecordFunc, Consumer<Component> showAboutMe, String fileName) throws IOException {
         this.name = name;
         this.information = information;
         this.columns = columns;
         this.createRecordFunc = createRecordFunc;
-        this.showAboutUs = showAboutUs;
+        this.showAboutMe = showAboutMe;
         File folder = new File("Courses");
         folder.mkdir();
         this.csv = new File(folder, fileName + ".csv");
@@ -53,8 +53,8 @@ public final class G26Course {
     }
 
 
-    public void showAboutUs(Component parent) {
-        showAboutUs.accept(parent);
+    public void showAboutMe(Component parent) {
+        showAboutMe.accept(parent);
     }
 
     public void updateTable() {
@@ -105,7 +105,7 @@ public final class G26Course {
         private String[] columns;
         private Function<G26LoginUser, Object[]> func;
         private String fileName;
-        private Consumer<Component> showAboutUs;
+        private Consumer<Component> showAboutMe;
 
         private Builder(String name) {
             this.name = name;
@@ -120,8 +120,8 @@ public final class G26Course {
             return this;
         }
 
-        public Builder showAboutUs(Consumer<Component> showAboutUs) {
-            this.showAboutUs = showAboutUs;
+        public Builder showAboutMe(Consumer<Component> showAboutMe) {
+            this.showAboutMe = showAboutMe;
             return this;
         }
 
@@ -145,7 +145,7 @@ public final class G26Course {
                 if (!G26Utils.notNull(name, info, columns, func, fileName)) {
                     throw new IllegalStateException("some infomation are lost.");
                 }
-                return new G26Course(name, info, columns, func, showAboutUs, fileName);
+                return new G26Course(name, info, columns, func, showAboutMe, fileName);
             } catch (IOException e) {
                 e.printStackTrace();
                 G26Utils.debug("Error: " + e.getMessage());

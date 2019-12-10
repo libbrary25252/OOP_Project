@@ -5,6 +5,8 @@ import project.oop.g26.manager.G26CourseManager;
 import project.oop.g26.manager.G26PanelManger;
 import project.oop.g26.misc.G26Utils;
 import project.oop.g26.panels.*;
+import project.oop.g26.panels.courses.G26CoursePane;
+import project.oop.g26.panels.courses.G26m4Java;
 import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
@@ -62,7 +64,7 @@ public class G26oopMainSys {
                 .columns(header)
                 .info("java java")
                 .fileName("G26M1Lam")
-                .showAboutUs(component -> {
+                .showAboutMe(component -> {
                     JOptionPane.showMessageDialog(component, "this is about us");
                 })
                 .create(createFunction).build();
@@ -71,10 +73,12 @@ public class G26oopMainSys {
                 .columns(header)
                 .info("a computer programming book written by Brian Kernighan and Dennis Ritchie, the latter of whom originally designed and implemented the language, as well as co-designed the Unix operating system with which development of the language was closely intertwined. The book was central to the development and popularization of the C programming language and is still widely read and used today. Because the book was co-authored by the original language designer, and because the first edition of the book served for many years as the de facto standard for the language, the book was regarded by many to be the authoritative reference on C.")
                 .fileName("G26M4Liu")
-                .showAboutUs(component -> {
+                .showAboutMe(component -> {
                     JOptionPane.showMessageDialog(component, "this is about us");
                 })
                 .create(createFunction).build();
+
+        G26CoursePane.addPart("Java", G26m4Java.class);
 
         courseManager.addCourse("Java", java);
         courseManager.addCourse("C", C);

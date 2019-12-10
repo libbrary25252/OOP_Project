@@ -1,4 +1,4 @@
-package project.oop.g26.panels;
+package project.oop.g26.panels.courses;
 
 import project.oop.g26.G26MainStream;
 import project.oop.g26.courses.G26Course;
@@ -6,12 +6,10 @@ import project.oop.g26.misc.G26m4Permission;
 
 import javax.swing.*;
 
-public final class G26CoursePane extends G26IPanel {
+public final class G26m4Java extends G26CoursePane {
 
-    private final G26Course g26Course;
-
-    public G26CoursePane(G26Course g26Course) {
-        this.g26Course = g26Course;
+    public G26m4Java(G26Course g26Course) {
+        super(g26Course);
     }
 
     @Override
@@ -22,12 +20,12 @@ public final class G26CoursePane extends G26IPanel {
         JTextPane operation = new JTextPane();
         G26MainStream stream = G26MainStream.getStream();
         if (stream.hasPermission(G26m4Permission.ADD_APPOINTMENT)) {
-            JButton createButton = new JButton("Make Appointment");
+            JButton createButton = new JButton("Make \n Appointment");
             operation.add(createButton);
             createButton.addActionListener(e -> g26Course.addRecord(stream.getLoginUser()));
         }
         if (stream.hasPermission(G26m4Permission.DELETE_APPOINTMENT)) {
-            JButton delButton = new JButton("Delete Appointment");
+            JButton delButton = new JButton("Delete \n Appointment");
             operation.add(delButton);
             deletionLinkTable(delButton, g26Course.getJTable(), g26Course.getCsv());
         }

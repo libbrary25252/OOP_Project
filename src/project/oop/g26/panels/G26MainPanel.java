@@ -59,6 +59,15 @@ public final class G26MainPanel extends G26IPanel {
                     }
                 });
                 JScrollPane pane = new JScrollPane(table);
+                JPanel panel = new JPanel();
+                panel.add(pane, CENTER_ALIGNMENT);
+                JButton delButton = new JButton("Delete");
+                if (stream.hasPermission(G26Permission.DELETE_LOGIN_RECORD)) {
+                    panel.add(delButton);
+                    delButton.addActionListener(ex -> {
+
+                    });
+                }
                 JOptionPane.showMessageDialog(this, pane, "Login Record", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 ex.printStackTrace();

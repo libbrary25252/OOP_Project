@@ -11,7 +11,7 @@ public enum G26Permission {
     /*
     main
      */
-    MODIFY_LOGIN_RECORD,
+    DELETE_LOGIN_RECORD,
     SHOW_ALL_LOGIN_RECORD,
     /*
     Course

@@ -15,7 +15,7 @@ public final class G26CoursePanel extends G26IPanel {
     protected void initGUI() {
         setLayout(null);
 
-        JLabel Course = new JLabel(G26m4HtmlTextBuilder.create("My Course: You can view your course and make appointment").setFontSize(10).build());
+        JLabel Course = new JLabel(G26m4HtmlTextBuilder.create("You can view your course and make appointment here").setFontSize(10).build());
         Course.setHorizontalAlignment(SwingConstants.LEFT);
         Course.setBounds(10, 10, 500, 20);
 

@@ -7,16 +7,15 @@ import project.oop.g26.misc.G26m4Permission;
 import javax.swing.*;
 import java.awt.*;
 
-public final class G26m4Java extends G26CoursePane {
-
-    public G26m4Java(G26Course g26Course) {
+public class G26m2Python extends G26CoursePane {
+    public G26m2Python(G26Course g26Course) {
         super(g26Course);
     }
 
     @Override
     protected void initGUI() {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.pink);
+        panel.setBackground(Color.darkGray);
         g26Course.updateTable();
         panel.add(new JScrollPane(g26Course.getJTable()), CENTER_ALIGNMENT);
         G26MainStream stream = G26MainStream.getStream();
@@ -31,7 +30,7 @@ public final class G26m4Java extends G26CoursePane {
             deletionLinkTable(delButton, g26Course.getJTable(), g26Course.getCsv());
         }
         JButton aboutMe = new JButton("About Me");
-        JButton aboutCourse = new JButton("About This Course");
+        JButton aboutCourse = new JButton("About this course");
         aboutMe.addActionListener(e -> g26Course.showAboutMe(this));
         aboutCourse.addActionListener(e -> JOptionPane.showMessageDialog(this, g26Course.getInformation(), "About this course", JOptionPane.INFORMATION_MESSAGE));
         add(aboutCourse);

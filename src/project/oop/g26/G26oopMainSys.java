@@ -4,13 +4,15 @@ import project.oop.g26.courses.G26Course;
 import project.oop.g26.manager.G26CourseManager;
 import project.oop.g26.manager.G26PanelManger;
 import project.oop.g26.misc.G26Utils;
+import project.oop.g26.misc.G26m4HtmlTextBuilder;
 import project.oop.g26.panels.*;
-import project.oop.g26.panels.courses.G26CoursePane;
-import project.oop.g26.panels.courses.G26m4Java;
+import project.oop.g26.panels.courses.*;
 import project.oop.g26.roles.G26m4ERole;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.function.Function;
 
 public class G26oopMainSys {
@@ -63,34 +65,72 @@ public class G26oopMainSys {
 
         G26Course java = G26Course.Builder.name("Java")
                 .columns(header)
-                .info("java java")
-                .fileName("G26M1Lam")
+                .info("Java is an object-oriented, cross platform, multi-purpose programming language produced by Sun Microsystems.",
+                        "First released in 1995, it was developed to be a machine independent web technology.")
+                .fileName("G26M4Lam")
                 .showAboutMe(component -> {
                     ImageIcon mem = new ImageIcon("Member2.jpg");
-                    String[] Intro = {
-                            "A Little programmer who know java, javascript, typescript, python, C#",
-                            "Now you’re probably thinking something like: “why exactly do I need Java of all options”? ",
-                            "As told before, there will never be a programming language with unchallenged authority. ",
-                            "But still, you can make a choice quite easy, if you analyze the long-term benefits of mastering a certain language.",
-                            " Let’s talk about why Java is so popular and why little is going to change in the closest time. "
-                    };
-                    JOptionPane.showMessageDialog(null, Intro, "About Me: Eric Lam", JOptionPane.INFORMATION_MESSAGE, mem);
+                    String Intro = G26m4HtmlTextBuilder.create("A Little programmer who know java, javascript, typescript, python, C#").setFontSize(7).build();
+                    JOptionPane.showMessageDialog(null, Intro, "About Me: Lam Chak Wai, Eric", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();
 
         G26Course C = G26Course.Builder.name("C")
                 .columns(header)
-                .info("Liu Tin Nok ")
-                .fileName("G26M4Liu")
+                .info("C is a general-purpose high level language that was originally developed by Dennis Ritchie for the Unix operating system.")
+                .fileName("G26M3Liu")
                 .showAboutMe(component -> {
-                    JOptionPane.showMessageDialog(component, "this is about us");
+                    try {
+                        ImageIcon mem = new ImageIcon(new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
+                        String Intro = "Hello, I am Keith Liu";
+                        JOptionPane.showMessageDialog(null, Intro, "About Me: Liu Tin Nok, Keith", JOptionPane.INFORMATION_MESSAGE, mem);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                })
+                .create(createFunction).build();
+
+        G26Course Cpp = G26Course.Builder.name("C++")
+                .columns(header)
+                .info("C++ is an intermediate level language, as it comprises a confirmation of both high level and low level language features.",
+                        "C++ is a statically typed, free form, multiparadigm, compiled general-purpose language.")
+                .fileName("G26M1Ng")
+                .showAboutMe(component -> {
+                    try {
+                        ImageIcon mem = new ImageIcon(new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
+                        String Intro = "Hello, I am Lobby Ng";
+                        JOptionPane.showMessageDialog(null, Intro, "About Me: Ng Lai Ying, Libby", JOptionPane.INFORMATION_MESSAGE, mem);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                })
+                .create(createFunction).build();
+
+        G26Course py = G26Course.Builder.name("Python")
+                .columns(header)
+                .info("Python is a widely used general-purpose, high level programming language.",
+                        "It was initially designed by Guido van Rossum in 1991 and developed by Python Software Foundation.")
+                .fileName("G26M2Lin")
+                .showAboutMe(component -> {
+                    try {
+                        ImageIcon mem = new ImageIcon(new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
+                        String Intro = "Hello, I am Matthew Lin";
+                        JOptionPane.showMessageDialog(null, Intro, "About Me: LIN Ka Hing, Matthew", JOptionPane.INFORMATION_MESSAGE, mem);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
                 })
                 .create(createFunction).build();
 
         G26CoursePane.addPart("Java", G26m4Java.class);
+        G26CoursePane.addPart("C", G26m3C.class);
+        G26CoursePane.addPart("C++", G26m1Cpp.class);
+        G26CoursePane.addPart("Python", G26m2Python.class);
 
         courseManager.addCourse("Java", java);
         courseManager.addCourse("C", C);
+        courseManager.addCourse("C++", Cpp);
+        courseManager.addCourse("Python", py);
 
         G26MainStream.setCourseManager(courseManager);
         G26MainStream.setPanelManger(panelManager);

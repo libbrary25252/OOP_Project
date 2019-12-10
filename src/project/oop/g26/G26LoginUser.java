@@ -77,6 +77,38 @@ public class G26LoginUser {
         }
     }
 
+    public static String modifyUser(long id, int column, Object data) {
+        try (G26m4CSVModifier modifier = new G26m4CSVModifier(userList)) {
+            int pos = modifier.getPos(0, id);
+            if (pos == -1) return "Cannot find user with this id";
+            modifier.modify(0, column, data);
+            modifier.writeAll();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    public static String addUser(String name, String password, String role, String year_of_Birth) {
+        String pw = G26m4ERole.hashPassword(password);
+        try (G26m4CSVModifier modifier = new G26m4CSVModifier(userList)) {
+            boolean contain = modifier.getCachesClone().stream().anyMatch(s -> s[1].equalsIgnoreCase(name));
+            if (!contain) {
+                G26IRole iRole = G26m4ERole.getCustomRole(role);
+                if (iRole == null) return "Unknown Role";
+                modifier.append(G26Utils.getRandomId(), pw, name, iRole.getName().toUpperCase(), year_of_Birth);
+                modifier.writeAll();
+                return null;
+            } else {
+                return "The user of that name already exist.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
+    }
+
     private String Year_of_Birth;
 
     public static String toCSV(long u_ID, String u_Name, String encrypted_Password, G26IRole u_Role, String year_of_Birth) {

@@ -26,7 +26,6 @@ public final class G26MainPanel extends G26IPanel {
         JButton myCourse = new JButton(G26m4HtmlTextBuilder.create("My Course").setFontSize(15).build());
         JButton profile = new JButton(G26m4HtmlTextBuilder.create("My Profile").setFontSize(15).build());
         JButton UserAc = new JButton(G26m4HtmlTextBuilder.create("User Account").setFontSize(15).build());
-        JButton G26m4R = new JButton(G26m4HtmlTextBuilder.create("Role Panel").setFontSize(15).build());
         JButton logout = new JButton(G26m4HtmlTextBuilder.create("Logout").setFontSize(7).build());
 
         w.setBounds(10, 10, 500, 20);
@@ -35,15 +34,14 @@ public final class G26MainPanel extends G26IPanel {
         loginRecord.setBounds(460, 100, 160, 120);
         aboutUs.setBounds(20, 250, 160, 120);
         UserAc.setBounds(240, 250, 160, 120);
-        G26m4R.setBounds(460, 250, 160, 120);
         logout.setBounds(560, 400, 80, 20);
 
-        addComponents(w, profile, myCourse, loginRecord, aboutUs, UserAc, G26m4R,logout);
+        addComponents(w, profile, myCourse, loginRecord, aboutUs, UserAc,logout);
 
         addPanelChanger(profile, "Profile");
         addPanelChanger(myCourse, "MyCourse");
         addPanelChanger(UserAc, "UserAccount");
-        addPanelChanger(G26m4R, "RolePanel");
+
         aboutUs.addActionListener(e -> {
             ImageIcon mem = G26m4ImageIconPool.getImage("group");
             String Intro = ("Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka Hing" + "\n" + "LAM Chak Wai");

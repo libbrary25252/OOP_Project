@@ -38,8 +38,13 @@ public class G26LoginUser {
             G26Utils.debug("Successfully generated user file");
             try (G26m4CSVWriter writer = new G26m4CSVWriter(userList)) {
                 writer.writeHeader(true, "U_ID", "Encrypted_Password", "U_Name", "U_Role", "Year_Of_Birth");
-                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "a", G26m4ERole.ADMINISTRATOR, "12-09-1990");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "a", G26m4ERole.ADMINISTRATOR, "18-05-2000");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "Eric", G26m4ERole.ADMINISTRATOR, "01-10-2000");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "Matthew", G26m4ERole.ADMINISTRATOR, "20-04-1998");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "Libby", G26m4ERole.ADMINISTRATOR, "15-02-2000");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("a"), "Keith", G26m4ERole.ADMINISTRATOR, "12-09-1990");
                 writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("g"), "g1", G26m4ERole.GUSER, "30-06-2000");
+                writer.write(G26Utils.getRandomId(), G26m4ERole.hashPassword("g"), "g2", G26m4ERole.GUSER, "01-01-2000");
             } catch (IOException e) {
                 e.printStackTrace();
             }

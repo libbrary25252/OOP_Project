@@ -97,7 +97,7 @@ public class G26oopMainSys {
                 .fileName("G26M1Ng")
                 .showAboutMe(component -> {
                     ImageIcon mem = G26m4ImageIconPool.getImage("libby");
-                    String Intro = "Hello, I am Libby Ng";
+                    String Intro = "Hello, I am Libby Ng\nI am a HDIT year 2 student who loves drawing";
                     JOptionPane.showMessageDialog(null, Intro, "About Me: Ng Lai Ying, Libby", JOptionPane.INFORMATION_MESSAGE, mem);
                 })
                 .create(createFunction).build();

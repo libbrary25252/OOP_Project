@@ -29,7 +29,7 @@ public class G26oopMainSys {
             G26m4ImageIconPool.addImage("group", new URL("https://media.discordapp.net/attachments/653979952236199938/654016641704787988/Member2.jpg"));
             G26m4ImageIconPool.addImage("liu", new URL("https://media.discordapp.net/attachments/641642508555649024/653930412300566580/image0.jpg?width=708&height=470"));
             G26m4ImageIconPool.addImage("libby", new URL("https://media.discordapp.net/attachments/653471789971668992/654031830869082112/IMG_4237.JPG?width=613&height=567"));
-            G26m4ImageIconPool.addImage("lam", new URL("https://cdn.discordapp.com/attachments/415882741092057088/654041177452183570/7718086048_IMG_5368.JPG"));
+            G26m4ImageIconPool.addImage("lam", new URL("https://media.discordapp.net/attachments/415882741092057088/654136248750833694/7718086048_IMG_5368.JPG?width=850&height=567"));
         } catch (Exception e) {
             e.printStackTrace();
         }

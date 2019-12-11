@@ -32,7 +32,6 @@ public final class G26UserPanel extends G26IPanel {
         JButton DelButton = new JButton("Delete");
 
         idList = updateTable(table, UR).stream().map(s -> Long.parseLong(s[0])).collect(Collectors.toList());
-
         JPanel panel = new JPanel();
         panel.add(new JScrollPane(table));
         add(panel);
@@ -41,6 +40,12 @@ public final class G26UserPanel extends G26IPanel {
         AddButton.setBounds(600, 10, 100, 30);
         MacButton.setBounds(600, 50, 100, 30);
         DelButton.setBounds(600, 90, 100, 30);
+        JButton back = new JButton("back");
+        addPanelChanger(back, "MainPanel");
+        back.setBounds(600, 130, 100, 30);
+        add(back);
+
+
         if (stream.hasPermission(G26m4Permission.MODIFY_USER_ACCOUNT)) {
             add(AddButton);
             add(DelButton);
@@ -53,6 +58,7 @@ public final class G26UserPanel extends G26IPanel {
                 return;
             }
             int row = table.getSelectedRow();
+            System.out.println(row);
             String[] function = {"Name", "Role", "Year of Birth"};
             JComboBox<String> cB = new JComboBox<>(function);
             JOptionPane.showMessageDialog(this, cB, "Select which you want to edit", JOptionPane.INFORMATION_MESSAGE);
@@ -90,6 +96,7 @@ public final class G26UserPanel extends G26IPanel {
                     return;
             }
             String input = JOptionPane.showInputDialog(this, "The data you want to change", "Change data of " + selected, JOptionPane.INFORMATION_MESSAGE);
+            if (input == null) input = "";
             Object obj = func.apply(input);
             if (obj == null) return;
             String str = G26LoginUser.modifyUser(idList.get(row), column, obj);
@@ -109,11 +116,14 @@ public final class G26UserPanel extends G26IPanel {
             String msg = G26LoginUser.addUser(name, pw, role, yearOfb);
             if (msg != null) {
                 JOptionPane.showMessageDialog(this, msg, "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                idList = updateTable(table, UR).stream().map(s -> Long.parseLong(s[0])).collect(Collectors.toList());
             }
         });
 
         deletionLinkTable(DelButton, table, UR);
-        validate();
+
+
     }
 
     private List<String[]> updateTable(JTable table, File UR) {
@@ -126,6 +136,8 @@ public final class G26UserPanel extends G26IPanel {
                     return false;
                 }
             });
+            table.repaint();
+            table.updateUI();
             return list;
         } catch (IOException e) {
             e.printStackTrace();

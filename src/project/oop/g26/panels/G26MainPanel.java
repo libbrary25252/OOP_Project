@@ -44,8 +44,6 @@ public final class G26MainPanel extends G26IPanel {
         addPanelChanger(myCourse, "MyCourse");
         addPanelChanger(UserAc, "UserAccount");
         addPanelChanger(G26m4R, "RolePanel");
-
-
         aboutUs.addActionListener(e -> {
             ImageIcon mem = G26m4ImageIconPool.getImage("group");
             String Intro = ("Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka Hing" + "\n" + "LAM Chak Wai");

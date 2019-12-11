@@ -87,7 +87,7 @@ public class G26LoginUser {
         try (G26m4CSVModifier modifier = new G26m4CSVModifier(userList)) {
             int pos = modifier.getPos(0, id);
             if (pos == -1) return "Cannot find user with this id";
-            modifier.modify(0, column, data);
+            modifier.modify(pos, column, data);
             modifier.writeAll();
             if (G26MainStream.getStream().getLoginUser().getU_ID() == id) {
                 int i = JOptionPane.showConfirmDialog(null, "You information has been edited, you must logged out to affect", "Your information changed", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);

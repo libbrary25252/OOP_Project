@@ -45,6 +45,10 @@ public enum G26m4ERole implements G26IRole {
         return Arrays.stream(permissions).map(G26m4Permission::getNode).collect(Collectors.joining("//"));
     }
 
+    public static File getRoleList() {
+        return roleList;
+    }
+
     public static String changeRoleInfo(String name, String info) {
         try (G26m4CSVModifier modifier = new G26m4CSVModifier(roleList)) {
             int pos = modifier.getPos(0, name);

@@ -49,7 +49,7 @@ public final class G26MainPanel extends G26IPanel {
         aboutUs.addActionListener(e -> {
             ImageIcon mem = G26m4ImageIconPool.getImage("group");
             String Intro = ("Member:(left to right)" + "\n" + "LIU Tin Nok" + "\n" + "NG Lai Ying" + "\n" + "LIN Ka Hing" + "\n" + "LAM Chak Wai");
-            JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL01, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
+            JOptionPane.showMessageDialog(null, Intro, "About Us: G26, CL02, 2019-2020, OOP", JOptionPane.INFORMATION_MESSAGE, mem);
         });
 
         loginRecord.addActionListener(e -> {

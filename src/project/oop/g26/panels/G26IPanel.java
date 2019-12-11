@@ -47,11 +47,6 @@ public abstract class G26IPanel extends JPanel {
                 repaint();
                 return null;
             }
-
-            @Override
-            protected void done() {
-                setVisible(false);
-            }
         }.execute();
     }
 

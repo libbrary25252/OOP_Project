@@ -52,10 +52,11 @@ public class G26oopMainSys {
         panelManager.addPanel("Login", new G26LoginPanel());
         panelManager.addPanel("Profile", new G26ProfilePanel());
         panelManager.addPanel("MyCourse", new G26CoursePanel());
-        panelManager.addPanel("UserAccount",new G26UserPanel());
+        panelManager.addPanel("UserAccount", new G26UserPanel());
+        panelManager.addPanel("RolePanel", new G26RolePanel());
 
 
-        final String[] header = {"AR_ID", "U_ID", "Reversed Time", "Recorded", "Remarks"};
+        final String[] header = {"AR_ID", "U_ID", "Time Slot", "Recorded", "Remarks"};
         final Function<G26LoginUser, Object[]> createFunction = g26LoginUser -> {
             String[] timeSlots = {"11:30-13:00", "13:00-14:30", "14:30-16:00", "16:00-17:30"};
             JComboBox<String> comboBox = new JComboBox<>(timeSlots);

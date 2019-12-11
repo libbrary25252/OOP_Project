@@ -40,6 +40,7 @@ public class G26PanelManger {
             public void run() {
                 System.out.println("Jumping into " + name);
                 frame.setContentPane(panel);
+                frame.setVisible(true);
                 current = panel;
             }
         }, delay);
